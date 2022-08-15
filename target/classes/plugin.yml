@@ -1,0 +1,16 @@
+name: HyacinthHello
+version: '1.2.0'
+main: me.blueb442.hyacinthhello.HyacinthHello
+api-version: 1.19
+authors: [ blueb ]
+commands:
+  joinmsg:
+    description: Set a custom join message
+    usage: /joinmsg [your message]
+    permission: hyacinthhello.joinmessage
+    permission-message: You don't have hyacinthhello.joinmessage!
+  leavemsg:
+    description: Set a custom leave message
+    usage: /leavemsg [your message]
+    permission: hyacinthhello.leavemsg
+    permission-message: You don't have hyacinthhello.leavemsg!
