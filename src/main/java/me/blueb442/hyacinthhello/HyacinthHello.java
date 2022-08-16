@@ -69,9 +69,8 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         if (!f.exists()) {
             try {
 
-                playerData.createSection("message");
-                playerData.set("message.hello", "");
-                playerData.set("message.goodbye", "");
+                playerData.createSection("join");
+                playerData.set("join.msg", "");
 
                 playerData.save(f);
 
@@ -86,14 +85,12 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         String hwr = this.getConfig().getString("hello-wrapper-right");
 
         // haha iconic user-made pun goes here
-        String message = playerData.getString("message.hello");
+        String message = playerData.getString("join.msg");
 
-        if (Objects.equals(playerData.getString("message.hello"), "")) {
+        if (Objects.equals(playerData.getString("join.msg"), "")) {
             Bukkit.getLogger().info("No hello found for " + joinerUUID);
-            return;
-        } else if (Objects.equals(playerData.getString("message.hello"), null)) {
+        } else if (Objects.equals(playerData.getString("join.msg"), null)) {
             Bukkit.getLogger().info("No hello found for " + joinerUUID);
-            return;
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 Bukkit.broadcastMessage(hwl + message + hwr);
@@ -116,9 +113,8 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         if (!f.exists()) {
             try {
 
-                playerData.createSection("message");
-                playerData.set("message.hello", "");
-                playerData.set("message.goodbye", "");
+                playerData.createSection("leave");
+                playerData.set("leave.msg", "");
 
                 playerData.save(f);
 
@@ -133,14 +129,12 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         String hwr = this.getConfig().getString("hello-wrapper-right");
 
         // haha iconic user-made pun goes here
-        String message = playerData.getString("message.goodbye");
+        String message = playerData.getString("leave.msg");
 
-        if (Objects.equals(playerData.getString("message.goodbye"), "")) {
+        if (Objects.equals(playerData.getString("leave.msg"), "")) {
             Bukkit.getLogger().info("No goodbye found for " + quitterUUID);
-            return;
-        } else if (Objects.equals(playerData.getString("message.goodbye"), null)) {
+        } else if (Objects.equals(playerData.getString("leave.msg"), null)) {
             Bukkit.getLogger().info("No goodbye found for " + quitterUUID);
-            return;
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 Bukkit.broadcastMessage(hwl + message + hwr);
