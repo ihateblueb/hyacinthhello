@@ -35,8 +35,8 @@ public class CommandJoinmsg implements CommandExecutor {
         if (p.hasPermission("hyacinthhello.joinmessage")) {
             if (sentence.length() <= getServer().getPluginManager().getPlugin("HyacinthHello").getConfig().getInt("maximum-message-length")) {
                 try {
-                    playerData.createSection("message");
-                    playerData.set("message.hello", sentence);
+                    playerData.createSection("join");
+                    playerData.set("join.msg", sentence);
                     playerData.save(f);
                 } catch (IOException var15) {
                     var15.printStackTrace();
