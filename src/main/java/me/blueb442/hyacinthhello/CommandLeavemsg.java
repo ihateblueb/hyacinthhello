@@ -35,8 +35,8 @@ public class CommandLeavemsg implements CommandExecutor {
         if (p.hasPermission("hyacinthhello.leavemessage")) {
             if (sentence.length() <= getServer().getPluginManager().getPlugin("HyacinthHello").getConfig().getInt("maximum-message-length")) {
                 try {
-                    playerData.createSection("message");
-                    playerData.set("message.goodbye", sentence);
+                    playerData.createSection("leave");
+                    playerData.set("leave.msg", sentence);
                     playerData.save(f);
                 } catch (IOException var15) {
                     var15.printStackTrace();
