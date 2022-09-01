@@ -1,74 +1,193 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+package me.blueb442.hyacinthhello;
 
-    <groupId>me.blueb442</groupId>
-    <artifactId>HyacinthHello</artifactId>
-    <version>1.2.0</version>
-    <packaging>jar</packaging>
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.entity.Player;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
-    <name>HyacinthHello</name>
+import java.io.File;
 
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+import java.io.IOException;
+import java.util.Objects;
+import java.util.UUID;
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
+public class HyacinthHello extends JavaPlugin implements Listener, CommandExecutor {
+    FileConfiguration config = this.getConfig();
 
-    <repositories>
-        <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-    </repositories>
+    @Override
+    public void onEnable() {
+        // Plugin startup logic
 
-    <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-</project>
+        getServer().getPluginManager().registerEvents(this, this);
+
+        this.getCommand("joinmsg").setExecutor(new CommandJoinmsg());
+        this.getCommand("leavemsg").setExecutor(new CommandLeavemsg());
+        this.getCommand("deathmsg").setExecutor(new CommandLeavemsg());
+
+        // Begin forming default config
+        config.addDefault("enabled", true);
+        config.addDefault("prefix", "§dHyacinthHello §8»§r");
+        config.addDefault("hello-wrapper-left", "§6»§e ");
+        config.addDefault("hello-wrapper-right", " §6«");
+        config.addDefault("maximum-message-length", 60);
+
+        config.options().copyDefaults(true);
+        saveConfig();
+
+        if (config.getBoolean("enabled")) {
+            return;
+        } else {
+            Bukkit.getLogger().info("Disabled by config.yml! Set enabled to true in config.yml to enable HyacinthHello.");
+            getServer().getPluginManager().disablePlugin(this);
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        // Plugin shutdown logic
+
+        Bukkit.getLogger().info("Saving data and shutting down. Goodbye!");
+
+    }
+
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player p = event.getPlayer();
+
+        UUID joinerUUID = p.getUniqueId();
+        File userdata = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("HyacinthHello")).getDataFolder(), File.separator + "PlayerDatabase");
+        File f = new File(userdata, File.separator + joinerUUID + ".yml");
+        FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+
+        //When the player file is created for the first time...
+        if (!f.exists()) {
+            try {
+
+                playerData.createSection("join");
+                playerData.set("join.msg", "");
+
+                playerData.save(f);
+
+                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + "(" + p.getName() + ")");
+            } catch (IOException exception) {
+
+                exception.printStackTrace();
+            }
+        }
+
+        String hwl = this.getConfig().getString("hello-wrapper-left");
+        String hwr = this.getConfig().getString("hello-wrapper-right");
+
+        // haha iconic user-made pun goes here
+        String message = playerData.getString("join.msg");
+
+        if (Objects.equals(playerData.getString("join.msg"), "")) {
+            Bukkit.getLogger().info("No hello found for " + joinerUUID + "(" + p.getName() + ")");
+        } else if (Objects.equals(playerData.getString("join.msg"), null)) {
+            Bukkit.getLogger().info("No hello found for " + joinerUUID + "(" + p.getName() + ")");
+        } else {
+            Bukkit.getScheduler().runTaskLater(this, () -> {
+                Bukkit.broadcastMessage(hwl + message + hwr);
+                Bukkit.getLogger().info("Hello sent for " + joinerUUID + "(" + p.getName() + ")");
+            },  2L); // delay for # of ticks, so it appears UNDER {user} joined.
+        }
+
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player p = event.getPlayer();
+
+        UUID quitterUUID = p.getUniqueId();
+        File userdata = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("HyacinthHello")).getDataFolder(), File.separator + "PlayerDatabase");
+        File f = new File(userdata, File.separator + quitterUUID + ".yml");
+        FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+
+        //When the player file is created for the first time...
+        if (!f.exists()) {
+            try {
+
+                playerData.createSection("leave");
+                playerData.set("leave.msg", "");
+
+                playerData.save(f);
+
+                Bukkit.getLogger().info("Created a data file for player " + quitterUUID + "(" + p.getName() + ")");
+            } catch (IOException exception) {
+
+                exception.printStackTrace();
+            }
+        }
+
+        String hwl = this.getConfig().getString("hello-wrapper-left");
+        String hwr = this.getConfig().getString("hello-wrapper-right");
+
+        // haha iconic user-made pun goes here
+        String message = playerData.getString("leave.msg");
+
+        if (Objects.equals(playerData.getString("leave.msg"), "")) {
+            Bukkit.getLogger().info("No goodbye found for " + quitterUUID + "(" + p.getName() + ")");
+        } else if (Objects.equals(playerData.getString("leave.msg"), null)) {
+            Bukkit.getLogger().info("No goodbye found for " + quitterUUID + "(" + p.getName() + ")");
+        } else {
+            Bukkit.getScheduler().runTaskLater(this, () -> {
+                Bukkit.broadcastMessage(hwl + message + hwr);
+                Bukkit.getLogger().info("Goodbye sent for " + quitterUUID + "(" + p.getName() + ")");
+            },  2L); // delay for # of ticks, so it appears UNDER {user} left.
+        }
+
+    }
+
+    @EventHandler
+    public void onPlayerDeathEvent(PlayerDeathEvent event) {
+        Player p = event.getEntity().getPlayer();
+
+        UUID deadUUID = p.getUniqueId();
+        File userdata = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("HyacinthHello")).getDataFolder(), File.separator + "PlayerDatabase");
+        File f = new File(userdata, File.separator + deadUUID + ".yml");
+        FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
+
+        //When the player file is created for the first time...
+        if (!f.exists()) {
+            try {
+
+                playerData.createSection("leave");
+                playerData.set("leave.msg", "");
+
+                playerData.save(f);
+
+                Bukkit.getLogger().info("Created a data file for player " + deadUUID + "(" + p.getName() + ")");
+            } catch (IOException exception) {
+
+                exception.printStackTrace();
+            }
+        }
+
+        String hwl = this.getConfig().getString("hello-wrapper-left");
+        String hwr = this.getConfig().getString("hello-wrapper-right");
+
+        // haha iconic user-made pun goes here
+        String message = playerData.getString("death.msg");
+
+        if (Objects.equals(playerData.getString("death.msg"), "")) {
+            Bukkit.getLogger().info("No death found for " + deadUUID + "(" + p.getName() + ")");
+        } else if (Objects.equals(playerData.getString("leave.msg"), null)) {
+            Bukkit.getLogger().info("No death found for " + deadUUID + "(" + p.getName() + ")");
+        } else {
+            Bukkit.getScheduler().runTaskLater(this, () -> {
+                Bukkit.broadcastMessage(hwl + message + hwr);
+                Bukkit.getLogger().info("Death sent for " + deadUUID + "(" + p.getName() + ")");
+            },  2L); // delay for # of ticks, so it appears UNDER {user} left.
+        }
+
+    }
+
+}
