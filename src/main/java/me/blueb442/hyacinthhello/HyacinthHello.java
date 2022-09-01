@@ -88,13 +88,13 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         String message = playerData.getString("join.msg");
 
         if (Objects.equals(playerData.getString("join.msg"), "")) {
-            Bukkit.getLogger().info("No hello found for " + joinerUUID);
+            Bukkit.getLogger().info("No hello found for " + joinerUUID + "(" + p.getName() + ")");
         } else if (Objects.equals(playerData.getString("join.msg"), null)) {
-            Bukkit.getLogger().info("No hello found for " + joinerUUID);
+            Bukkit.getLogger().info("No hello found for " + joinerUUID + "(" + p.getName() + ")");
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 Bukkit.broadcastMessage(hwl + message + hwr);
-                Bukkit.getLogger().info("Hello sent for " + joinerUUID);
+                Bukkit.getLogger().info("Hello sent for " + joinerUUID + "(" + p.getName() + ")");
             },  2L); // delay for # of ticks, so it appears UNDER {user} joined.
         }
 
@@ -132,13 +132,13 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         String message = playerData.getString("leave.msg");
 
         if (Objects.equals(playerData.getString("leave.msg"), "")) {
-            Bukkit.getLogger().info("No goodbye found for " + quitterUUID);
+            Bukkit.getLogger().info("No goodbye found for " + quitterUUID + "(" + p.getName() + ")");
         } else if (Objects.equals(playerData.getString("leave.msg"), null)) {
-            Bukkit.getLogger().info("No goodbye found for " + quitterUUID);
+            Bukkit.getLogger().info("No goodbye found for " + quitterUUID + "(" + p.getName() + ")");
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 Bukkit.broadcastMessage(hwl + message + hwr);
-                Bukkit.getLogger().info("Goodbye sent for " + quitterUUID);
+                Bukkit.getLogger().info("Goodbye sent for " + quitterUUID + "(" + p.getName() + ")");
             },  2L); // delay for # of ticks, so it appears UNDER {user} left.
         }
 
