@@ -6,7 +6,7 @@
 
     <groupId>me.blueb442</groupId>
     <artifactId>HyacinthHello</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.3</version>
     <packaging>jar</packaging>
 
     <name>HyacinthHello</name>
@@ -60,6 +60,10 @@
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>rosewood-repo</id>
+            <url>https://repo.rosewooddev.io/repository/public/</url>
         </repository>
     </repositories>
 
