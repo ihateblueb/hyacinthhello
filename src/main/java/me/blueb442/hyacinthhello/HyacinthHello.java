@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.logging.Level;
 
-import org.black_ixx.playerpoints.PlayerPoints;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -43,13 +42,17 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         this.config.options().copyDefaults(true);
         this.saveConfig();
         if (!this.config.getBoolean("enabled")) {
-            Bukkit.getLogger().info("Disabled by config.yml! Set enabled to true in config.yml to enable HyacinthHello.");
+            Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+            Bukkit.getLogger().warning(" ");
+            Bukkit.getLogger().warning("Disabled by config.yml! Set enabled to true in config.yml to enable HyacinthHello.");
+            Bukkit.getLogger().warning(" ");
+            Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
             this.getServer().getPluginManager().disablePlugin(this);
         }
     }
 
     public void onDisable() {
-        Bukkit.getLogger().info("Saving data and shutting down. Cya, lmao!");
+        Bukkit.getLogger().info("Saving data and shutting down.");
     }
 
     @EventHandler
@@ -67,6 +70,12 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
+                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning(" ");
+                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on onPlayerJoin event.");
+                Bukkit.getLogger().warning("Please report the above errors to the author.");
+                Bukkit.getLogger().warning(" ");
+                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
             }
         }
 
@@ -103,6 +112,12 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 Bukkit.getLogger().info("Created a data file for player " + quitterUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
+                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning(" ");
+                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on onPlayerQuit event.");
+                Bukkit.getLogger().warning("Please report the above errors to the author.");
+                Bukkit.getLogger().warning(" ");
+                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
             }
         }
 
@@ -127,6 +142,8 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Player p = event.getEntity().getPlayer();
+        // prevents any errors when player is not defined
+        assert p != null;
         UUID deadUUID = p.getUniqueId();
         File userdata = new File(((Plugin)Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("HyacinthHello"))).getDataFolder(), File.separator + "PlayerDatabase");
         File f = new File(userdata, File.separator + deadUUID + ".yml");
@@ -139,6 +156,12 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 Bukkit.getLogger().info("Created a data file for player " + deadUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
+                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning(" ");
+                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on onPlayerDeath event.");
+                Bukkit.getLogger().warning("Please report the above errors to the author.");
+                Bukkit.getLogger().warning(" ");
+                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
             }
         }
 
