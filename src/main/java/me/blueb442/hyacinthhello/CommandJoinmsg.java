@@ -1,5 +1,6 @@
 package me.blueb442.hyacinthhello;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,21 +16,22 @@ import java.util.UUID;
 
 import static org.bukkit.Bukkit.getServer;
 
-
 public class CommandJoinmsg implements CommandExecutor {
 
     // This method is called, when somebody uses our command
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         Player p = (Player)sender;
+        UUID joinerUUID = p.getUniqueId();
         String sentence1 = String.join(" ", args);
         String sentence2 = sentence1.replaceAll("\\[", " ");
         String sentence = sentence2.replaceAll("\\]", " ");
+
+
         String pfx =  getServer().getPluginManager().getPlugin("HyacinthHello").getConfig().getString("prefix");
-        p.sendMessage(pfx + " Set your join message to " + sentence);
-        UUID joinerUUID = p.getUniqueId();
-        File userdata = new File(((Plugin) Objects.requireNonNull(getServer().getPluginManager().getPlugin("HyacinthHello"))).getDataFolder(), File.separator + "PlayerDatabase");
+        p.sendMessage(pfx + " Set your join message to §7" + sentence + "§f.");
+
+        File userdata = new File(Objects.requireNonNull(getServer().getPluginManager().getPlugin("HyacinthHello")).getDataFolder(), File.separator + "PlayerDatabase");
         File f = new File(userdata, File.separator + joinerUUID + ".yml");
         FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
         if (p.hasPermission("hyacinthhello.joinmessage")) {
