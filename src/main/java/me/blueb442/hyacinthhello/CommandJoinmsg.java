@@ -18,7 +18,6 @@ import static org.bukkit.Bukkit.getServer;
 
 public class CommandJoinmsg implements CommandExecutor {
 
-    // This method is called, when somebody uses our command
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player p = (Player)sender;
@@ -48,7 +47,6 @@ public class CommandJoinmsg implements CommandExecutor {
             }
         }
 
-        // If the player (or console) uses our command correct, we can return true
         return true;
     }
 }
