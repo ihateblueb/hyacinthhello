@@ -18,7 +18,6 @@ import static org.bukkit.Bukkit.getServer;
 
 public class CommandDeathmsg implements CommandExecutor {
 
-    // This method is called, when somebody uses our command
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -47,7 +46,7 @@ public class CommandDeathmsg implements CommandExecutor {
                     p.sendMessage(pfx + " That's too long! Your message has to be at most " + getServer().getPluginManager().getPlugin("HyacinthHello").getConfig().getInt("maximum-message-length") + " characters!");
                 }
             }
-        // If the player (or console) uses our command correct, we can return true
+
         return true;
     }
 }
