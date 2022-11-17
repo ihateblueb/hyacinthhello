@@ -15,21 +15,23 @@ import java.util.UUID;
 
 import static org.bukkit.Bukkit.getServer;
 
-
 public class CommandLeavemsg implements CommandExecutor {
 
     // This method is called, when somebody uses our command
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        Player p = (Player)sender;
+        Player p = (Player) sender;
         String sentence1 = String.join(" ", args);
         String sentence2 = sentence1.replaceAll("\\[", " ");
         String sentence = sentence2.replaceAll("\\]", " ");
-        String pfx =  getServer().getPluginManager().getPlugin("HyacinthHello").getConfig().getString("prefix");
-        p.sendMessage(pfx + " Set your leave message to " + sentence);
+
         UUID joinerUUID = p.getUniqueId();
-        File userdata = new File(((Plugin) Objects.requireNonNull(getServer().getPluginManager().getPlugin("HyacinthHello"))).getDataFolder(), File.separator + "PlayerDatabase");
+
+
+        String pfx = getServer().getPluginManager().getPlugin("HyacinthHello").getConfig().getString("prefix");
+        p.sendMessage(pfx + " Set your leave message to §7" + sentence + "§f.");
+        File userdata = new File(Objects.requireNonNull(getServer().getPluginManager().getPlugin("HyacinthHello")).getDataFolder(), File.separator + "PlayerDatabase");
         File f = new File(userdata, File.separator + joinerUUID + ".yml");
         FileConfiguration playerData = YamlConfiguration.loadConfiguration(f);
         if (p.hasPermission("hyacinthhello.leavemessage")) {
