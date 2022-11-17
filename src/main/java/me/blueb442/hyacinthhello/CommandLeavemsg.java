@@ -17,7 +17,6 @@ import static org.bukkit.Bukkit.getServer;
 
 public class CommandLeavemsg implements CommandExecutor {
 
-    // This method is called, when somebody uses our command
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -48,7 +47,6 @@ public class CommandLeavemsg implements CommandExecutor {
             }
         }
 
-        // If the player (or console) uses our command correct, we can return true
         return true;
     }
 }
