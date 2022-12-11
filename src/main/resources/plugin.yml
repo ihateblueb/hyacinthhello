@@ -1,16 +1,26 @@
 name: HyacinthHello
+description: '${project.version}'
 version: '${project.version}'
 main: me.blueb442.hyacinthhello.HyacinthHello
 api-version: 1.19
 authors: [ blueb ]
+softdepend: [ PlaceholderAPI ]
 commands:
   joinmsg:
     description: Set a custom join message
     usage: /joinmsg [your message]
     permission: hyacinthhello.joinmessage
     permission-message: You don't have hyacinthhello.joinmessage!
+    aliases: [joinmessage]
   leavemsg:
     description: Set a custom leave message
     usage: /leavemsg [your message]
-    permission: hyacinthhello.leavemsg
-    permission-message: You don't have hyacinthhello.leavemsg!
+    permission: hyacinthhello.leavemessage
+    permission-message: You don't have hyacinthhello.leavemessage!
+    aliases: [quitmsg, leavemessage, quitmessage]
+  deathmsg:
+    description: Set a custom death message
+    usage: /deathmsg [your message]
+    permission: hyacinthhello.deathmessage
+    permission-message: You don't have hyacinthhello.deathmessage!
+    aliases: [deathmessage]
