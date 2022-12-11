@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -18,6 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.ChatColor;
 
 public class HyacinthHello extends JavaPlugin implements Listener, CommandExecutor {
     FileConfiguration config = this.getConfig();
@@ -27,18 +27,19 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
 
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(this, this);
-        this.getCommand("joinmsg").setExecutor(new CommandJoinmsg());
-        this.getCommand("leavemsg").setExecutor(new CommandLeavemsg());
-        this.getCommand("deathmsg").setExecutor(new CommandDeathmsg());
+        Bukkit.getLogger().info("[===---------* Hyacinth Hello *---------==]");
+        Bukkit.getLogger().info(" ");
+        Bukkit.getLogger().info("Enabled! Please contact me on GitHub or Spigot for support!");
+        Bukkit.getLogger().info(" ");
+        Bukkit.getLogger().info("[===---------* Hyacinth Hello *---------==]");
+        Objects.requireNonNull(this.getCommand("joinmsg")).setExecutor(new CommandJoinmsg());
+        Objects.requireNonNull(this.getCommand("leavemsg")).setExecutor(new CommandLeavemsg());
+        Objects.requireNonNull(this.getCommand("deathmsg")).setExecutor(new CommandDeathmsg());
         this.config.addDefault("enabled", true);
         this.config.addDefault("prefix", "§dHyacinthHello §8»§r");
         this.config.addDefault("hello-wrapper-left", "§6»§e ");
         this.config.addDefault("hello-wrapper-right", " §6«");
         this.config.addDefault("maximum-message-length", 60);
-        this.config.addDefault("enable-points", true);
-        this.config.addDefault("point-cost-join", 10);
-        this.config.addDefault("point-cost-leave", 10);
-        this.config.addDefault("point-cost-death", 15);
         this.config.options().copyDefaults(true);
         this.saveConfig();
         if (!this.config.getBoolean("enabled")) {
@@ -49,11 +50,24 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
             Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
             this.getServer().getPluginManager().disablePlugin(this);
         }
+
+        // PlaceholderAPI hook
+
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new HyacinthHelloExpansion().register();
+            Bukkit.getLogger().info("[HyacinthHello] Hooked into PlaceholderAPI");
+        }
+
     }
 
     public void onDisable() {
-        Bukkit.getLogger().info("Saving data and shutting down.");
+        Bukkit.getLogger().info("[===---------* Hyacinth Hello *---------==]");
+        Bukkit.getLogger().info(" ");
+        Bukkit.getLogger().info("Shutting down. Goodbye!");
+        Bukkit.getLogger().info(" ");
+        Bukkit.getLogger().info("[===---------* Hyacinth Hello *---------==]");
     }
+
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -89,8 +103,13 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 if (p.hasPermission("hyacinthhello.joinmessage")) {
-                    Bukkit.broadcastMessage(hwl + message + hwr);
-                    Bukkit.getLogger().info("Death sent for " + joinerUUID + " (" + p.getName() + ")");
+                    if (p.hasPermission("hyacinthhello.usecolor")) {
+                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', hwl + message + hwr));
+                        Bukkit.getLogger().info("Hello sent for " + joinerUUID + " (" + p.getName() + ")");
+                    } else {
+                        Bukkit.broadcastMessage(hwl + message + hwr);
+                        Bukkit.getLogger().info("Hello sent for " + joinerUUID + " (" + p.getName() + ")");
+                    }
                 }
             }, 2L);
         }
@@ -131,8 +150,13 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 if (p.hasPermission("hyacinthhello.leavemessage")) {
-                    Bukkit.broadcastMessage(hwl + message + hwr);
-                    Bukkit.getLogger().info("Goodbye sent for " + quitterUUID + " (" + p.getName() + ")");
+                    if (p.hasPermission("hyacinthhello.usecolor")) {
+                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', hwl + message + hwr));
+                        Bukkit.getLogger().info("Goodbye sent for " + quitterUUID + " (" + p.getName() + ")");
+                    } else {
+                        Bukkit.broadcastMessage(hwl + message + hwr);
+                        Bukkit.getLogger().info("Goodbye sent for " + quitterUUID + " (" + p.getName() + ")");
+                    }
                 }
             }, 2L);
         }
@@ -175,8 +199,13 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 if (p.hasPermission("hyacinthhello.deathmessage")) {
-                    Bukkit.broadcastMessage(hwl + message + hwr);
-                    Bukkit.getLogger().info("Death sent for " + deadUUID + " (" + p.getName() + ")");
+                    if (p.hasPermission("hyacinthhello.usecolor")) {
+                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', hwl + message + hwr));
+                        Bukkit.getLogger().info("Death sent for " + deadUUID + " (" + p.getName() + ")");
+                    } else {
+                        Bukkit.broadcastMessage(hwl + message + hwr);
+                        Bukkit.getLogger().info("Death sent for " + deadUUID + " (" + p.getName() + ")");
+                    }
                 }
             }, 2L);
         }
