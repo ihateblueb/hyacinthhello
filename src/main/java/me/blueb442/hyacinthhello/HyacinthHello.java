@@ -1,5 +1,7 @@
 package me.blueb442.hyacinthhello;
 
+import org.bstats.bukkit.Metrics;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -35,6 +37,10 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         Objects.requireNonNull(this.getCommand("joinmsg")).setExecutor(new CommandJoinmsg());
         Objects.requireNonNull(this.getCommand("leavemsg")).setExecutor(new CommandLeavemsg());
         Objects.requireNonNull(this.getCommand("deathmsg")).setExecutor(new CommandDeathmsg());
+
+        int pluginId = 16278;
+        Metrics metrics = new Metrics(this, pluginId);
+
         this.config.addDefault("enabled", true);
         this.config.addDefault("prefix", "§dHyacinthHello §8»§r");
         this.config.addDefault("hello-wrapper-left", "§6»§e ");
