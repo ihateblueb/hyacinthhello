@@ -1,4 +1,4 @@
 # hyacinthhello
 Normal join messages are boring, spruce up your server with per-user join messages!
 
-This repository is more likely to be out of date compared to the Spigot page! It's just here for reference to other developers who may want to see how other features can integrate into their plugins.
+![Image](https://proxy.spigotmc.org/6073faa04fadf3653b5060528e4ec02704cb4edd?url=https%3A%2F%2Fbstats.org%2Fsignatures%2Fbukkit%2FHyacinthHello.svg)
