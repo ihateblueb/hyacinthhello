@@ -145,7 +145,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
             }
         }
 
-        return "Params "+params+" were not caught. Available: join, leave, death.";
+        return null;
     }
 
 
