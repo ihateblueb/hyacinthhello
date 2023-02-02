@@ -1,7 +1,7 @@
 # hyacinthhello
 Normal join messages are boring, spruce up your server with per-user join messages!
 
-**[SpigotMC Page](https://s.orchidmc.me/hh)**
+**[Modrinth Page](https://s.orchidmc.me/hh)**
 
 **[Discord Support Server](https://discord.gg/84TZGRkXy6)**
 
