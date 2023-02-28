@@ -7,6 +7,8 @@ Normal join messages are boring, spruce up your server with per-user join messag
 
 **[GitHub Wiki](https://github.com/livelaughlemon/hyacinthhello/wiki)**
 
+[https://bing.com](https://google.com)
+
 ## Compiling
 
 Compile with maven, set the "Run" field in the run config to `clean package`.
