@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class HyacinthHelloExpansion extends PlaceholderExpansion {
 
-    // get methods, mainly used for PlaceholdeAPI
+    // get methods, offline are below this one
     public String getJoinMessage(Player p) {
         UUID joinerUUID = p.getUniqueId();
         File userdata = new File(((Plugin) Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("HyacinthHello"))).getDataFolder(), File.separator + "PlayerDatabase");
@@ -40,8 +40,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         String message = playerData.getString("join.msg");
         if (Objects.equals(playerData.getString("join.msg"), "")) {
             Bukkit.getLogger().info("[Called by getJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         } else if (Objects.equals(playerData.getString("join.msg"), (Object) null)) {
             Bukkit.getLogger().info("[Called by getJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         }
         return message;
     }
@@ -69,8 +71,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         String message = playerData.getString("leave.msg");
         if (Objects.equals(playerData.getString("leave.msg"), "")) {
             Bukkit.getLogger().info("[Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
             Bukkit.getLogger().info("[Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         }
         return message;
     }
@@ -98,8 +102,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         String message = playerData.getString("death.msg");
         if (Objects.equals(playerData.getString("death.msg"), "")) {
             Bukkit.getLogger().info("[Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
             Bukkit.getLogger().info("[Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         }
         return message;
     }
@@ -129,8 +135,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         String message = playerData.getString("join.msg");
         if (Objects.equals(playerData.getString("join.msg"), "")) {
             Bukkit.getLogger().info("[Called by getOfflineJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         } else if (Objects.equals(playerData.getString("join.msg"), (Object) null)) {
             Bukkit.getLogger().info("[Called by getOfflineJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         }
         return message;
     }
@@ -159,9 +167,11 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("leave.msg");
         if (Objects.equals(playerData.getString("leave.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[Called by getOfflineLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[Called by getOfflineLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         }
         return message;
     }
@@ -189,9 +199,11 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("death.msg");
         if (Objects.equals(playerData.getString("death.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            message = "";
         }
         return message;
     }
@@ -208,7 +220,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
 
     @Override
     public String getVersion() {
-        return "0.1.0 (1.4.2)";
+        return "0.2.0 (1.5.3)";
     }
 
     @Override
@@ -239,17 +251,35 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
 
         if (params.startsWith("join_")) {
             String playerName = params.replace("join_","");
-            return getOfflineJoinMessage(playerName);
+            String cleanPlayerName = playerName.replaceAll("\\\\", "");
+            String joinmessage = getOfflineJoinMessage(cleanPlayerName);
+            if (!Objects.equals(joinmessage, "")) {
+                return joinmessage;
+            } else {
+                return "";
+            }
         }
 
         if (params.startsWith("leave_")) {
             String playerName = params.replace("leave_","");
-            return getOfflineLeaveMessage(playerName);
+            String cleanPlayerName = playerName.replaceAll("\\\\", "");
+            String leavemessage = getOfflineLeaveMessage(cleanPlayerName);
+            if (!Objects.equals(leavemessage, "")) {
+                return leavemessage;
+            } else {
+                return "";
+            }
         }
 
         if (params.startsWith("death_")) {
             String playerName = params.replace("death_","");
-            return getOfflineDeathMessage(playerName);
+            String cleanPlayerName = playerName.replaceAll("\\\\", "");
+            String deathmessage = getOfflineDeathMessage(cleanPlayerName);
+            if (!Objects.equals(deathmessage, "")) {
+                return deathmessage;
+            } else {
+                return "";
+            }
         }
 
         return null;
