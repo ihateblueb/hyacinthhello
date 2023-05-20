@@ -33,6 +33,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         Objects.requireNonNull(this.getCommand("joinmsg")).setExecutor(new CommandJoinmsg());
         Objects.requireNonNull(this.getCommand("leavemsg")).setExecutor(new CommandLeavemsg());
         Objects.requireNonNull(this.getCommand("deathmsg")).setExecutor(new CommandDeathmsg());
+        Objects.requireNonNull(this.getCommand("hyacinthhello")).setExecutor(new CommandHyacinthHello());
 
         int pluginId = 16278;
         Metrics metrics = new Metrics(this, pluginId);

@@ -24,3 +24,9 @@ commands:
     permission: hyacinthhello.deathmessage
     permission-message: You don't have hyacinthhello.deathmessage!
     aliases: [deathmessage]
+  hyacinthhello:
+    description: Commands related to HyacinthHello
+    usage: /hyacinthhello
+    permission: hyacinthhello.command
+    permission-message: You don't have hyacinthhello.command!
+    aliases: [hyacinth, hh]
