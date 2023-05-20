@@ -5,7 +5,7 @@ Normal join messages are boring, spruce up your server with per-user join messag
 
 **[Discord Support Server](https://discord.gg/84TZGRkXy6)**
 
-**[GitHub Wiki](https://github.com/livelaughlemon/hyacinthhello/wiki)**
+**[Wiki](https://docs.orchidmc.me/dev/minecraft-plugins/hyacinthhello)**
 
 ## Compiling
 
