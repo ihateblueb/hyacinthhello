@@ -29,11 +29,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
 
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(this, this);
-        Bukkit.getLogger().info("[==---------* Hyacinth Hello *---------==]");
-        Bukkit.getLogger().info(" ");
-        Bukkit.getLogger().info("Enabled! Please contact me on GitHub or Spigot for support!");
-        Bukkit.getLogger().info(" ");
-        Bukkit.getLogger().info("[==---------* Hyacinth Hello *---------==]");
+        Bukkit.getLogger().info("[HyacinthHello] Enabled! Please contact me on Discord for support.");
         Objects.requireNonNull(this.getCommand("joinmsg")).setExecutor(new CommandJoinmsg());
         Objects.requireNonNull(this.getCommand("leavemsg")).setExecutor(new CommandLeavemsg());
         Objects.requireNonNull(this.getCommand("deathmsg")).setExecutor(new CommandDeathmsg());
@@ -49,11 +45,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         this.config.options().copyDefaults(true);
         this.saveConfig();
         if (!this.config.getBoolean("enabled")) {
-            Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
-            Bukkit.getLogger().warning(" ");
-            Bukkit.getLogger().warning("Disabled by config.yml! Set enabled to true in config.yml to enable HyacinthHello.");
-            Bukkit.getLogger().warning(" ");
-            Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
+            Bukkit.getLogger().info("[HyacinthHello] Disabled by config.yml! Check the enabled field to reinstall.");
             this.getServer().getPluginManager().disablePlugin(this);
         }
 
@@ -61,17 +53,13 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
 
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new HyacinthHelloExpansion().register();
-            Bukkit.getLogger().info("[HyacinthHello] Hooked into PlaceholderAPI");
+            Bukkit.getLogger().info("[HyacinthHello] Hooked into PlaceholderAPI. See placeholders on wiki.");
         }
 
     }
 
     public void onDisable() {
-        Bukkit.getLogger().info("[==---------* Hyacinth Hello *---------==]");
-        Bukkit.getLogger().info(" ");
-        Bukkit.getLogger().info("Shutting down. Goodbye!");
-        Bukkit.getLogger().info(" ");
-        Bukkit.getLogger().info("[==---------* Hyacinth Hello *---------==]");
+        Bukkit.getLogger().info("[HyacinthHello] Shutting down. Goodbye!");
     }
 
 
@@ -90,12 +78,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on onPlayerJoin event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Could not generate or save the configuration! Thrown on onPlayerJoin event. Please report the above errors to the author.");
             }
         }
 
@@ -137,12 +120,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 Bukkit.getLogger().info("Created a data file for player " + quitterUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on onPlayerQuit event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Could not generate or save the configuration! Thrown on onPlayerQuit event. Please report the above errors to the author.");
             }
         }
 
@@ -186,12 +164,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 Bukkit.getLogger().info("Created a data file for player " + deadUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on onPlayerDeath event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[==---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Could not generate or save the configuration! Thrown on onPlayerDeath event. Please report the above errors to the author.");
             }
         }
 
