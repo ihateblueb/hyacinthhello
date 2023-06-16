@@ -29,12 +29,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on getJoinMessage event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getJoinMessage event.");
             }
         }
         String message = playerData.getString("join.msg");
@@ -60,12 +55,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on getLeaveMessage event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getLeaveMessage event.");
             }
         }
         String message = playerData.getString("leave.msg");
@@ -91,12 +81,8 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on getDeathMessage event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getDeathMessage event.");
+
             }
         }
         String message = playerData.getString("death.msg");
@@ -124,12 +110,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on getJoinMessage event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getJoinMessage event.");
             }
         }
         String message = playerData.getString("join.msg");
@@ -157,12 +138,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on getLeaveMessage event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getLeaveMessage event.");
             }
         }
         String message = playerData.getString("leave.msg");
@@ -189,12 +165,8 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("Could not generate or save the configuration! Thrown on getDeathMessage event.");
-                Bukkit.getLogger().warning("Please report the above errors to the author.");
-                Bukkit.getLogger().warning(" ");
-                Bukkit.getLogger().warning("[===---------* Hyacinth Hello *---------==]");
+                Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getDeathMessage event.");
+
             }
         }
         String message = playerData.getString("death.msg");
