@@ -173,7 +173,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         if (Objects.equals(playerData.getString("death.msg"), "")) {
             Bukkit.getLogger().info("[Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
-        } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
+        } else if (Objects.equals(playerData.getString("death.msg"), (Object) null)) {
             Bukkit.getLogger().info("[Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         }
@@ -228,7 +228,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
             if (!Objects.equals(joinmessage, "")) {
                 return joinmessage;
             } else {
-                return "";
+                return "No join message found.";
             }
         }
 
@@ -239,7 +239,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
             if (!Objects.equals(leavemessage, "")) {
                 return leavemessage;
             } else {
-                return "";
+                return "No leave message found.";
             }
         }
 
@@ -250,7 +250,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
             if (!Objects.equals(deathmessage, "")) {
                 return deathmessage;
             } else {
-                return "";
+                return "No death message found.";
             }
         }
 
