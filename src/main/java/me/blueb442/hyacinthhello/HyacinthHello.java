@@ -29,11 +29,15 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
 
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(this, this);
-        Bukkit.getLogger().info("[HyacinthHello] Enabled! Please contact me on Discord for support.");
+        Bukkit.getLogger().info("[HyacinthHello] Enabled plugin.");
         Objects.requireNonNull(this.getCommand("joinmsg")).setExecutor(new CommandJoinmsg());
+        Bukkit.getLogger().info("[HyacinthHello] Loaded joinmsg command");
         Objects.requireNonNull(this.getCommand("leavemsg")).setExecutor(new CommandLeavemsg());
+        Bukkit.getLogger().info("[HyacinthHello] Loaded leavemsg command");
         Objects.requireNonNull(this.getCommand("deathmsg")).setExecutor(new CommandDeathmsg());
+        Bukkit.getLogger().info("[HyacinthHello] Loaded deathmsg command");
         Objects.requireNonNull(this.getCommand("hyacinthhello")).setExecutor(new CommandHyacinthHello());
+        Bukkit.getLogger().info("[HyacinthHello] Loaded hyacinthhello command");
 
         int pluginId = 16278;
         Metrics metrics = new Metrics(this, pluginId);
@@ -76,7 +80,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 playerData.createSection("join");
                 playerData.set("join.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Could not generate or save the configuration! Thrown on onPlayerJoin event. Please report the above errors to the author.");
@@ -87,18 +91,18 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         String hwr = this.getConfig().getString("hello-wrapper-right");
         String message = playerData.getString("join.msg");
         if (Objects.equals(playerData.getString("join.msg"), "")) {
-            Bukkit.getLogger().info("No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] No hello found for " + joinerUUID + " (" + p.getName() + ")");
         } else if (Objects.equals(playerData.getString("join.msg"), (Object)null)) {
-            Bukkit.getLogger().info("No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] No hello found for " + joinerUUID + " (" + p.getName() + ")");
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 if (p.hasPermission("hyacinthhello.joinmessage")) {
                     if (p.hasPermission("hyacinthhello.usecolor")) {
                         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', hwl + message + hwr));
-                        Bukkit.getLogger().info("Hello sent for " + joinerUUID + " (" + p.getName() + ")");
+                        Bukkit.getLogger().info("[HyacinthHello] Hello sent for " + joinerUUID + " (" + p.getName() + ")");
                     } else {
                         Bukkit.broadcastMessage(hwl + message + hwr);
-                        Bukkit.getLogger().info("Hello sent for " + joinerUUID + " (" + p.getName() + ")");
+                        Bukkit.getLogger().info("[HyacinthHello] Hello sent for " + joinerUUID + " (" + p.getName() + ")");
                     }
                 }
             }, 2L);
@@ -118,7 +122,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 playerData.createSection("leave");
                 playerData.set("leave.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + quitterUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + quitterUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Could not generate or save the configuration! Thrown on onPlayerQuit event. Please report the above errors to the author.");
@@ -129,21 +133,21 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         String hwr = this.getConfig().getString("hello-wrapper-right");
         String message = playerData.getString("leave.msg");
         if (Objects.equals(playerData.getString("leave.msg"), "")) {
-            Bukkit.getLogger().info("No goodbye found for " + quitterUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] No goodbye found for " + quitterUUID + " (" + p.getName() + ")");
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object)null)) {
-            Bukkit.getLogger().info("No goodbye found for " + quitterUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] No goodbye found for " + quitterUUID + " (" + p.getName() + ")");
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 if (p.hasPermission("hyacinthhello.leavemessage")) {
                     if (p.hasPermission("hyacinthhello.usecolor")) {
                         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', hwl + message + hwr));
-                        Bukkit.getLogger().info("Goodbye sent for " + quitterUUID + " (" + p.getName() + ")");
+                        Bukkit.getLogger().info("[HyacinthHello] Goodbye sent for " + quitterUUID + " (" + p.getName() + ")");
                     } else {
                         Bukkit.broadcastMessage(hwl + message + hwr);
-                        Bukkit.getLogger().info("Goodbye sent for " + quitterUUID + " (" + p.getName() + ")");
+                        Bukkit.getLogger().info("[HyacinthHello] Goodbye sent for " + quitterUUID + " (" + p.getName() + ")");
                     }
                 }
-            }, 2L);
+            }, 0L);
         }
 
     }
@@ -162,7 +166,7 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
                 playerData.createSection("death");
                 playerData.set("death.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + deadUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + deadUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Could not generate or save the configuration! Thrown on onPlayerDeath event. Please report the above errors to the author.");
@@ -173,18 +177,18 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         String hwr = this.getConfig().getString("hello-wrapper-right");
         String message = playerData.getString("death.msg");
         if (Objects.equals(playerData.getString("death.msg"), "")) {
-            Bukkit.getLogger().info("No death found for " + deadUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] No death found for " + deadUUID + " (" + p.getName() + ")");
         } else if (Objects.equals(playerData.getString("death.msg"), (Object)null)) {
-            Bukkit.getLogger().info("No death found for " + deadUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] No death found for " + deadUUID + " (" + p.getName() + ")");
         } else {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 if (p.hasPermission("hyacinthhello.deathmessage")) {
                     if (p.hasPermission("hyacinthhello.usecolor")) {
                         Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', hwl + message + hwr));
-                        Bukkit.getLogger().info("Death sent for " + deadUUID + " (" + p.getName() + ")");
+                        Bukkit.getLogger().info("[HyacinthHello] Death sent for " + deadUUID + " (" + p.getName() + ")");
                     } else {
                         Bukkit.broadcastMessage(hwl + message + hwr);
-                        Bukkit.getLogger().info("Death sent for " + deadUUID + " (" + p.getName() + ")");
+                        Bukkit.getLogger().info("[HyacinthHello] Death sent for " + deadUUID + " (" + p.getName() + ")");
                     }
                 }
             }, 2L);

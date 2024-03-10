@@ -26,7 +26,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 playerData.createSection("join");
                 playerData.set("join.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getJoinMessage event.");
@@ -34,10 +34,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("join.msg");
         if (Objects.equals(playerData.getString("join.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         } else if (Objects.equals(playerData.getString("join.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         }
         return message;
@@ -52,7 +52,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 playerData.createSection("leave");
                 playerData.set("leave.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getLeaveMessage event.");
@@ -60,10 +60,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("leave.msg");
         if (Objects.equals(playerData.getString("leave.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         }
         return message;
@@ -78,7 +78,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 playerData.createSection("death");
                 playerData.set("death.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getDeathMessage event.");
@@ -87,10 +87,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("death.msg");
         if (Objects.equals(playerData.getString("death.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         }
         return message;
@@ -107,7 +107,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 playerData.createSection("join");
                 playerData.set("join.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getJoinMessage event.");
@@ -115,10 +115,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("join.msg");
         if (Objects.equals(playerData.getString("join.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getOfflineJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getOfflineJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         } else if (Objects.equals(playerData.getString("join.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getOfflineJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getOfflineJoinMessage] No hello found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         }
         return message;
@@ -135,7 +135,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 playerData.createSection("leave");
                 playerData.set("leave.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getLeaveMessage event.");
@@ -143,10 +143,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("leave.msg");
         if (Objects.equals(playerData.getString("leave.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getOfflineLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getOfflineLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         } else if (Objects.equals(playerData.getString("leave.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getOfflineLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getOfflineLeaveMessage] No goodbye found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         }
         return message;
@@ -162,7 +162,7 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
                 playerData.createSection("death");
                 playerData.set("death.msg", "");
                 playerData.save(f);
-                Bukkit.getLogger().info("Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
+                Bukkit.getLogger().info("[HyacinthHello] Created a data file for player " + joinerUUID + " (" + p.getName() + ")");
             } catch (IOException var10) {
                 var10.printStackTrace();
                 Bukkit.getLogger().warning("[HyacinthHello] Please report the above errors to the author. Could not generate or save the configuration! Thrown on getDeathMessage event.");
@@ -171,10 +171,10 @@ public class HyacinthHelloExpansion extends PlaceholderExpansion {
         }
         String message = playerData.getString("death.msg");
         if (Objects.equals(playerData.getString("death.msg"), "")) {
-            Bukkit.getLogger().info("[Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         } else if (Objects.equals(playerData.getString("death.msg"), (Object) null)) {
-            Bukkit.getLogger().info("[Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
+            Bukkit.getLogger().info("[HyacinthHello] [Called by getOfflineDeathMessage] No death found for " + joinerUUID + " (" + p.getName() + ")");
             message = "";
         }
         return message;
