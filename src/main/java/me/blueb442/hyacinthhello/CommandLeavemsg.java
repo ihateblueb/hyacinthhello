@@ -1,5 +1,6 @@
 package me.blueb442.hyacinthhello;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +23,8 @@ public class CommandLeavemsg implements CommandExecutor {
         Player p = (Player) sender;
         String sentence1 = String.join(" ", args);
         String sentence2 = sentence1.replaceAll("\\[", " ");
-        String sentence = sentence2.replaceAll("\\]", " ");
+        String sentence3 = sentence2.replaceAll("\\]", " ");
+        String sentence = ChatColor.translateAlternateColorCodes('&', sentence3);
 
         UUID joinerUUID = p.getUniqueId();
 

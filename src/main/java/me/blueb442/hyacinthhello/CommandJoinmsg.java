@@ -1,5 +1,6 @@
 package me.blueb442.hyacinthhello;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +23,9 @@ public class CommandJoinmsg implements CommandExecutor {
         UUID joinerUUID = p.getUniqueId();
         String sentence1 = String.join(" ", args);
         String sentence2 = sentence1.replaceAll("\\[", " ");
-        String sentence = sentence2.replaceAll("\\]", " ");
+        String sentence3 = sentence2.replaceAll("\\]", " ");
+        String sentence = ChatColor.translateAlternateColorCodes('&', sentence3);
+
 
 
         String pfx =  getServer().getPluginManager().getPlugin("HyacinthHello").getConfig().getString("prefix");
