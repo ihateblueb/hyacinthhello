@@ -1,3 +1,5 @@
+> ## THIS REPO HAS BEEN MOVED TO https://git.gay/blueb/hyacinthhello
+
 # hyacinthhello
 Normal join messages are boring, spruce up your server with per-user join messages!
 
