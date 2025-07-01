@@ -21,10 +21,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.ChatColor;
 
-public class HyacinthHello extends JavaPlugin implements Listener, CommandExecutor {
+public class HyacinthHelloOld extends JavaPlugin implements Listener, CommandExecutor {
     FileConfiguration config = this.getConfig();
 
-    public HyacinthHello() {
+    public HyacinthHelloOld() {
     }
 
     public void onEnable() {
