@@ -1,4 +1,4 @@
-package me.blueb442.hyacinthhello;
+package site.remlit.blueb.hyacinthhello;
 
 import org.bstats.bukkit.Metrics;
 
@@ -29,18 +29,12 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
 
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(this, this);
-        Bukkit.getLogger().info("[HyacinthHello] Enabled plugin.");
         Objects.requireNonNull(this.getCommand("joinmsg")).setExecutor(new CommandJoinmsg());
-        Bukkit.getLogger().info("[HyacinthHello] Loaded joinmsg command");
         Objects.requireNonNull(this.getCommand("leavemsg")).setExecutor(new CommandLeavemsg());
-        Bukkit.getLogger().info("[HyacinthHello] Loaded leavemsg command");
         Objects.requireNonNull(this.getCommand("deathmsg")).setExecutor(new CommandDeathmsg());
-        Bukkit.getLogger().info("[HyacinthHello] Loaded deathmsg command");
         Objects.requireNonNull(this.getCommand("hyacinthhello")).setExecutor(new CommandHyacinthHello());
-        Bukkit.getLogger().info("[HyacinthHello] Loaded hyacinthhello command");
 
-        int pluginId = 16278;
-        Metrics metrics = new Metrics(this, pluginId);
+        new Metrics(this, 16278);
 
         this.config.addDefault("enabled", true);
         this.config.addDefault("prefix", "§dHyacinthHello §8»§r");
@@ -55,7 +49,6 @@ public class HyacinthHello extends JavaPlugin implements Listener, CommandExecut
         }
 
         // PlaceholderAPI hook
-
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new HyacinthHelloExpansion().register();
             Bukkit.getLogger().info("[HyacinthHello] Hooked into PlaceholderAPI. See placeholders on wiki.");

@@ -1,4 +1,4 @@
-package me.blueb442.hyacinthhello;
+package site.remlit.blueb.hyacinthhello;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
