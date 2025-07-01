@@ -30,10 +30,10 @@ class Storage {
          * */
         fun set(player: String, key: String, value: String) {
             val file = File(Path("$root/PlayerDatabase/$player.yml").toAbsolutePath().toString())
-            file.mkdirs()
             val playerData = YamlConfiguration.loadConfiguration(file)
             return try {
                 playerData.set(key, value)
+                playerData.save(file)
             } catch (e: Exception) { }
         }
     }

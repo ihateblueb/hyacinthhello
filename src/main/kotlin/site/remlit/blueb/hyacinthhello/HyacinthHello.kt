@@ -11,9 +11,9 @@ class HyacinthHello : JavaPlugin() {
         Metrics(this, 16278)
 
         config.addDefault("enabled", true)
-        config.addDefault("prefix", "§dHyacinthHello §8»§r")
-        config.addDefault("hello-wrapper-left", "§6»§e ")
-        config.addDefault("hello-wrapper-right", " §6«")
+        config.addDefault("prefix", "")
+        config.addDefault("wrapper-left", "&e&o")
+        config.addDefault("wrapper-right", "")
         config.addDefault("maximum-message-length", 60)
         config.options().copyDefaults(true)
         saveConfig()

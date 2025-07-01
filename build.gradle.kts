@@ -35,7 +35,7 @@ dependencies {
 group = "site.remlit.blueb"
 version = "2.0.0"
 description = "HyacinthHello"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks {
     shadowJar {
