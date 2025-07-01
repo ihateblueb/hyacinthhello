@@ -44,14 +44,7 @@ class Commands : BaseCommand() {
     private fun handle(type: String, sender: CommandSender, args: Array<String>?) {
         val player = sender as Player
 
-        if (args.isNullOrEmpty()) {
-            sender.sendMessage(
-                ChatColor.translateAlternateColorCodes('&', "${getPrefix()}No message passed")
-            )
-            return
-        }
-
-        val sentence = args.joinToString(" ")
+        val sentence = args?.joinToString(" ") ?: ""
 
         if (sentence.length > getMaxLength()) {
             sender.sendMessage(
@@ -62,7 +55,7 @@ class Commands : BaseCommand() {
 
         Storage.set(player.uniqueId.toString(), "$type.msg", sentence)
         sender.sendMessage(
-            ChatColor.translateAlternateColorCodes('&', "${getPrefix()}Set $type message to $sentence&r.")
+            ChatColor.translateAlternateColorCodes('&', if (sentence.isBlank()) "${getPrefix()}Cleared $type message" else "${getPrefix()}Set $type message to $sentence")
         )
         return
     }
