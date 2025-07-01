@@ -4,6 +4,8 @@ A simple plugin that lets players set their own messages that send when they joi
 
 Messages can be set from `/joinmsg`, `/leavemsg`, and `/deathmsg` and are stored in the plugin directory under `PlayerDatabase`.
 
+See a demo at https://www.youtube.com/watch?v=L6Li0QnvPis.
+
 ## Commands
 
 Messages are set with commands.
