@@ -1,5 +1,6 @@
 package site.remlit.blueb.hyacinthhello
 
+import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Default
@@ -9,7 +10,7 @@ import org.bukkit.command.CommandSender
 @Suppress("Unused")
 @CommandAlias("hyacinthhello|hyacinth|hh")
 @CommandPermission("hyacinthhello.use")
-class Command {
+class Commands : BaseCommand() {
     @Default
     fun default(sender: CommandSender) {
 
@@ -34,5 +35,9 @@ class Command {
     @CommandPermission("hyacinthhello.deathmsg")
     fun deathMsg(sender: CommandSender) {
 
+    }
+
+    companion object {
+        fun register() = HyacinthHello.commandManager.registerCommand(Commands())
     }
 }

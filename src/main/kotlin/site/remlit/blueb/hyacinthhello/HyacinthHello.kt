@@ -1,11 +1,13 @@
 package site.remlit.blueb.hyacinthhello
 
+import co.aikar.commands.BukkitCommandManager
 import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 
 class HyacinthHello : JavaPlugin() {
     override fun onEnable() {
         instance = this
+        commandManager = BukkitCommandManager(instance)
         Metrics(this, 16278)
 
         config.addDefault("enabled", true)
@@ -27,10 +29,13 @@ class HyacinthHello : JavaPlugin() {
         }
 
         Storage.init()
+        Listener.register()
+        Commands.register()
     }
     override fun onDisable() {}
 
     companion object {
         lateinit var instance: JavaPlugin
+        lateinit var commandManager: BukkitCommandManager
     }
 }

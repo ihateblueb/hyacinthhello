@@ -21,4 +21,8 @@ class Listener : Listener {
     fun onPlayerDeath(event: PlayerDeathEvent) {
 
     }
+
+    companion object {
+        fun register() = HyacinthHello.instance.server.pluginManager.registerEvents(Listener(), HyacinthHello.instance)
+    }
 }
