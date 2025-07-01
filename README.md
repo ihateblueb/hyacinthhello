@@ -1,6 +1,6 @@
 # HyacinthHello
 
-A simple plugin that lets players set their own messages that send when they join, leave, or die.
+Simple plugin for players to set their own custom join, leave, and death messages.
 
 Messages can be set from `/joinmsg`, `/leavemsg`, and `/deathmsg` and are stored in the plugin directory under `PlayerDatabase`.
 
