@@ -5,9 +5,11 @@ import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Subcommand
+import co.aikar.commands.annotation.Syntax
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import java.util.UUID
 
 @Suppress("Unused")
 @CommandAlias("hyacinthhello|hyacinth|hh")
@@ -25,6 +27,7 @@ class Commands : BaseCommand() {
     }
     private fun getMaxLength() = HyacinthHello.instance.config.get("maximum-message-length")?.toString()?.toInt() ?: 60
 
+
     @Subcommand("joinmsg")
     @CommandAlias("joinmsg")
     @CommandPermission("hyacinthhello.joinmsg")
@@ -41,11 +44,50 @@ class Commands : BaseCommand() {
     fun deathMsg(sender: CommandSender, args: Array<String>?) = handle("death", sender, args)
 
 
-    private fun handle(type: String, sender: CommandSender, args: Array<String>?) {
+    @Subcommand("mod joinmsg")
+    @Syntax("[player] [message]")
+    @CommandPermission("hyacinthhello.mod")
+    fun modJoinMsg(sender: CommandSender, args: Array<String>?) = handleMod("join", sender, args)
+
+    @Subcommand("mod leavemsg")
+    @Syntax("[player] [message]")
+    @CommandPermission("hyacinthhello.mod")
+    fun modLeaveMsg(sender: CommandSender, args: Array<String>?) = handleMod("leave", sender, args)
+
+    @Subcommand("mod deathmsg")
+    @Syntax("[player] [message]")
+    @CommandPermission("hyacinthhello.mod")
+    fun modDeathMsg(sender: CommandSender, args: Array<String>?) = handleMod("death", sender, args)
+
+
+    private fun handleMod(type: String, sender: CommandSender, args: Array<String>?) {
+        val id = args?.getOrNull(0)
+        if (id == null) {
+            sender.sendMessage(
+                ChatColor.translateAlternateColorCodes('&', "${getPrefix()}Please specify a player's username or UUID")
+            )
+            return
+        }
+        return handle(type, sender, args.filter { it != id }.toTypedArray(), id)
+    }
+
+    private fun handle(type: String, sender: CommandSender, args: Array<String>?, username: String? = null) {
         val player = sender as Player
+        val otherPlayer = HyacinthHello.instance.server.getPlayer(username ?: "")
+        if (username != null && otherPlayer == null) {
+            sender.sendMessage(
+                ChatColor.translateAlternateColorCodes('&', "${getPrefix()}Player not found")
+            )
+            return
+        }
+
+        var notSelf = false
+        if (username != null)
+            notSelf = true
+
+        val msgPlayer = if (notSelf) otherPlayer!! else player
 
         val sentence = args?.joinToString(" ") ?: ""
-
         if (sentence.length > getMaxLength()) {
             sender.sendMessage(
                 ChatColor.translateAlternateColorCodes('&', "${getPrefix()}Message too long, max length is ${getMaxLength()} characters")
@@ -53,9 +95,12 @@ class Commands : BaseCommand() {
             return
         }
 
-        Storage.set(player.uniqueId.toString(), "$type.msg", sentence)
+        Storage.set(msgPlayer.uniqueId.toString(), "$type.msg", sentence)
         sender.sendMessage(
-            ChatColor.translateAlternateColorCodes('&', if (sentence.isBlank()) "${getPrefix()}Cleared $type message" else "${getPrefix()}Set $type message to $sentence")
+            ChatColor.translateAlternateColorCodes('&',
+                if (sentence.isBlank()) "${getPrefix()}Cleared $type message${if (notSelf) " for " + msgPlayer.name else ""}"
+                else "${getPrefix()}Set $type message to $sentence${if (notSelf) " for " + msgPlayer.name else ""}"
+            )
         )
         return
     }

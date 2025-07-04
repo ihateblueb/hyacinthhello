@@ -8,12 +8,15 @@ See a demo at https://www.youtube.com/watch?v=L6Li0QnvPis.
 
 ## Commands
 
-Messages are set with commands.
+Messages are set with commands. You can clear a message by passing a blank value.
 - `/joinmsg [message]`
 - `/leavemsg [message]`
 - `/deathmsg [message]`
 
-You can clear a message by passing a blank value.
+Moderators can override messages of other users if they have the `hyacinthhello.mod` permission node.
+- `/hh mod joinmsg [user] [message]`
+- `/hh mod leavemsg [user] [message]`
+- `/hh mod deathmsg [user] [message]`
 
 ## Configuration
 
@@ -30,6 +33,7 @@ maximum-message-length: 60 # Checked when player sets message
 ## Permissions
 
 - `hyacinthhello.use` to use any commands
+- `hyacinthhello.mod` to use mod commands
 - `hyacinthhello.joinmsg` to set and have join messages sent
 - `hyacinthhello.leavemsg` to set and have leave messages sent
 - `hyacinthhello.deathmsg` to set and have death messages sent

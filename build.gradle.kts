@@ -32,7 +32,7 @@ dependencies {
 }
 
 group = "site.remlit.blueb"
-version = "2.0.0"
+version = "2.1.0"
 description = "HyacinthHello"
 java.sourceCompatibility = JavaVersion.VERSION_17
 

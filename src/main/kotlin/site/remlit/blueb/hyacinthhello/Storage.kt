@@ -13,6 +13,8 @@ class Storage {
             Files.createDirectories(Path("$root/PlayerDatabase"))
         }
 
+        fun listPlayers() = Files.list(Path("$root/PlayerDatabase")).toList()
+
         /**
          * @param player UUID of player as string
          * */

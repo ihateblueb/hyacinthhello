@@ -1,14 +1,12 @@
 package site.remlit.blueb.hyacinthhello
 
 import co.aikar.commands.BukkitCommandManager
-import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 
 class HyacinthHello : JavaPlugin() {
     override fun onEnable() {
         instance = this
         commandManager = BukkitCommandManager(instance)
-        Metrics(this, 16278)
 
         config.addDefault("enabled", true)
         config.addDefault("prefix", "")
@@ -17,6 +15,9 @@ class HyacinthHello : JavaPlugin() {
         config.addDefault("maximum-message-length", 60)
         config.options().copyDefaults(true)
         saveConfig()
+
+        Storage.init()
+        Metrics.register()
 
         if (!config.getBoolean("enabled")) {
             Logger.warn("Plugin disabled by configuration, shutting down.")
@@ -28,7 +29,6 @@ class HyacinthHello : JavaPlugin() {
             Expansion().register()
         }
 
-        Storage.init()
         Listener.register()
         Commands.register()
     }
