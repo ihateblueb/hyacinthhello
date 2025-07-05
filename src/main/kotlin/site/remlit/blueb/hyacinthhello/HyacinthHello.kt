@@ -13,6 +13,7 @@ class HyacinthHello : JavaPlugin() {
         config.addDefault("wrapper-left", "&e&o")
         config.addDefault("wrapper-right", "")
         config.addDefault("maximum-message-length", 60)
+        config.addDefault("regex-filters", listOf<String>())
         config.options().copyDefaults(true)
         saveConfig()
 

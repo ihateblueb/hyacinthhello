@@ -28,6 +28,9 @@ prefix: "" # Prefix before command responses
 wrapper-left: "&e&o" # Prefix for messages
 wrapper-right: "" # Suffix for messages
 maximum-message-length: 60 # Checked when player sets message
+regex-filters: # Regex filters don't need to be wrapped in /
+  - "simpleexactmatch"
+  - "t[a-zA-Z]st"
 ```
 
 ## Permissions

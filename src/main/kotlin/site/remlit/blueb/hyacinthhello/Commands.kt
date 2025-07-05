@@ -9,7 +9,6 @@ import co.aikar.commands.annotation.Syntax
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import java.util.UUID
 
 @Suppress("Unused")
 @CommandAlias("hyacinthhello|hyacinth|hh")
@@ -93,6 +92,19 @@ class Commands : BaseCommand() {
                 ChatColor.translateAlternateColorCodes('&', "${getPrefix()}Message too long, max length is ${getMaxLength()} characters")
             )
             return
+        }
+
+        val filters = HyacinthHello.instance.config.getList("regex-filters")
+        if (filters != null && filters.isNotEmpty()) {
+            for (filter in filters) {
+                val string = filter.toString()
+                if (string.isNotBlank() && sentence.matches(Regex(string))) {
+                    sender.sendMessage(
+                        ChatColor.translateAlternateColorCodes('&', "${getPrefix()}This message isn't allowed")
+                    )
+                    return
+                }
+            }
         }
 
         Storage.set(msgPlayer.uniqueId.toString(), "$type.msg", sentence)
