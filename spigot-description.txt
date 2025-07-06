@@ -4,7 +4,7 @@ Simple plugin for players to set their own custom join, leave, and death message
 
 Messages can be set from /joinmsg, /leavemsg, and deathmsg and are stored in the plugin directory under PlayerDatabase.
 
-[MEDIA=youtube]L6Li0QnvPis[/MEDIA].
+[MEDIA=youtube]L6Li0QnvPis[/MEDIA]
 
 [SIZE=5]Commands[/SIZE]
 
