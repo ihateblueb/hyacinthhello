@@ -8,6 +8,9 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import site.remlit.blueb.hyacinthhello.event.HyacinthDeathMessageEvent
+import site.remlit.blueb.hyacinthhello.event.HyacinthJoinMessageEvent
+import site.remlit.blueb.hyacinthhello.event.HyacinthLeaveMessageEvent
 
 class Listener : Listener {
     @EventHandler()
@@ -27,7 +30,7 @@ class Listener : Listener {
     private fun handle(player: Player, eventName: String) {
         val type = when (eventName) {
             "PlayerJoinEvent" -> "join"
-            "PlayerQuitEvent" -> "quit"
+            "PlayerQuitEvent" -> "leave"
             "PlayerDeathEvent" -> "death"
             else -> throw RuntimeException("When on evenName caught illegal event $eventName")
         }
@@ -42,6 +45,12 @@ class Listener : Listener {
 
         if (!player.hasPermission("hyacinthhello.color"))
             message = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', message))
+
+        when (type) {
+            "join" -> HyacinthJoinMessageEvent(player, message!!)
+            "leave" -> HyacinthLeaveMessageEvent(player, message!!)
+            "death" -> HyacinthDeathMessageEvent(player, message!!)
+        }
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyacinthHello.instance, {
             HyacinthHello.instance.server.broadcastMessage(
