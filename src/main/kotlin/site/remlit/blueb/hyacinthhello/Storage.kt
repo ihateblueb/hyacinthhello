@@ -19,8 +19,8 @@ class Storage {
          * @param player UUID of player as string
          * */
         fun get(player: String, key: String): String? {
-            val file = File(Path("$root/PlayerDatabase/$player.yml").toAbsolutePath().toString())
-            file.mkdirs()
+            val file = File(Path("$root/PlayerDatabase/$player.yml").toString())
+            if (!file.exists()) file.createNewFile()
             val playerData = YamlConfiguration.loadConfiguration(file)
             return try {
                 playerData.getString(key)
@@ -31,7 +31,8 @@ class Storage {
          * @param player UUID of player as string
          * */
         fun set(player: String, key: String, value: String) {
-            val file = File(Path("$root/PlayerDatabase/$player.yml").toAbsolutePath().toString())
+            val file = File(Path("$root/PlayerDatabase/$player.yml").toString())
+            if (!file.exists()) file.createNewFile()
             val playerData = YamlConfiguration.loadConfiguration(file)
             return try {
                 playerData.set(key, value)
