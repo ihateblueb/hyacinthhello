@@ -2,6 +2,8 @@ plugins {
     kotlin("jvm") version "2.2.0"
     id("com.gradleup.shadow") version "8.3.0"
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    `java-library`
+    `maven-publish`
 }
 
 repositories {
@@ -32,7 +34,7 @@ dependencies {
 }
 
 group = "site.remlit.blueb"
-version = "2.1.1"
+version = "2.2.0"
 description = "HyacinthHello"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -60,5 +62,47 @@ tasks.processResources {
     filteringCharset = "UTF-8"
     filesMatching("plugin.yml") {
         expand(props)
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "remlitsite"
+            url = if (version.toString().contains("SNAPSHOT")) uri("https://repo.remlit.site/snapshots") else uri("https://repo.remlit.site/releases")
+
+            credentials {
+                username = System.getenv("REPO_ACTOR")
+                password = System.getenv("REPO_TOKEN")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "site.remlit.blueb"
+            artifactId = "hyacinthhello"
+            version = project.version.toString()
+
+            from(components["java"])
+
+            pom {
+                name = "hyacinthhello"
+                url = "https://github.com/ihateblueb/hyacinthhello"
+
+                developers {
+                    developer {
+                        id = "ihateblueb"
+                        name = "ihateblueb"
+                        email = "ihateblueb@proton.me"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git://github.com/ihateblueb/hyacinthhello.git"
+                    developerConnection = "scm:git:ssh://github.com/ihateblueb/hyacinthhello.git"
+                    url = "https://github.com/ihateblueb/hyacinthhello"
+                }
+            }
+        }
     }
 }

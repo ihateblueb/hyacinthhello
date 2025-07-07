@@ -19,6 +19,7 @@ class HyacinthHello : JavaPlugin() {
 
         Storage.init()
         Metrics.register()
+        ProxyMessenger.register()
 
         if (!config.getBoolean("enabled")) {
             Logger.warn("Plugin disabled by configuration, shutting down.")

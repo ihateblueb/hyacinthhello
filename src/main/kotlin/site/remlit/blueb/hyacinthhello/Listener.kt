@@ -37,6 +37,8 @@ class Listener : Listener {
 
         var message = Storage.get(player.uniqueId.toString(), "$type.msg")
 
+        handleProxyMessage(type, player, message)
+
         if (message.isNullOrBlank())
             return
 
@@ -57,6 +59,18 @@ class Listener : Listener {
                 ChatColor.translateAlternateColorCodes('&', "${getWrapperLeft()}$message${getWrapperRight()}")
             )
         }, 1L)
+    }
+
+    fun handleProxyMessage(type: String, player: Player, message: String?) {
+        var message = message
+
+        if (!player.hasPermission("hyacinthhello.${type}msg"))
+            message = null
+
+        if (message != null && !player.hasPermission("hyacinthhello.color"))
+            message = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', message))
+
+        ProxyMessenger.send("$type::${player.uniqueId},${player.name}::${message ?: "NULL"}")
     }
 
     companion object {
