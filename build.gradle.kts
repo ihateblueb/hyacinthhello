@@ -31,6 +31,7 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
     implementation("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.0.2")
+    implementation("redis.clients:jedis:6.0.0")
 }
 
 group = "site.remlit.blueb"

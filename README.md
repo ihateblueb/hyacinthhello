@@ -24,6 +24,7 @@ The configuration allows you to modify how the plugin looks. Here's an example:
 
 ```yaml
 enabled: true # Whether to enable the plugin
+proxy-mode: true # Whether to enable Velocity support (see below)
 prefix: "" # Prefix before command responses
 wrapper-left: "&e&o" # Prefix for messages
 wrapper-right: "" # Suffix for messages
@@ -31,6 +32,7 @@ maximum-message-length: 60 # Checked when player sets message
 regex-filters: # Regex filters don't need to be wrapped in /
   - "simpleexactmatch"
   - "t[a-zA-Z]st"
+use-proxy-default-messages: false # Disables default join, leave, and death messages so that HyacinthHello Velocity can broadcast them to the entire network. See more under Velocity.
 ```
 
 ## Permissions
@@ -56,3 +58,46 @@ Placeholders will also have color and formatting in them if the player has permi
 
 You can also pass a username to get a specific player's message.
 - `%hyacinthhello_join_[username]%`
+
+## Velocity
+
+With HyacinthHello Velocity, you can have HyacinthHello's custom messages broadcasted across your entire network.
+
+To do this, download the Velocity plugin from [here](https://github.com/ihateblueb/hyacinthhello-velocity) under Releases.
+
+The Velocity plugin can just forward to the other servers, or take over all join, leave, and death messages across the proxy. The latter option is recommended.
+
+Requires Redis.
+
+On your server:
+
+```yaml
+proxy-mode: true
+proxy-redis:
+  address: 0.0.0.0 # Your redis address, this is likely fine
+  port: 6379 # Your redis port, this is likely fine
+  channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+```
+
+On your proxy:
+
+```yaml
+# Variables:
+#   {p}   player name
+#   {s}   server name
+#   {m}   forwarded message
+redis:
+  address: 0.0.0.0 # Your redis address, this is likely fine
+  port: 6379 # Your redis port, this is likely fine
+  prefix: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+
+override-backends: true # Overrides default and custom messages. 
+join-message: '<yellow>{p} joined {s}' # Allows setting custom formatting for join
+leave-message: '<yellow>{p} left {s}' # Allows setting custom formatting for leave
+death-message: '<yellow>{m}' # Just wraps over the message forwarded from backend servers
+
+wrapper-left: '&e&o'
+wrapper-right: ''
+```
+
+On your proxy `bungee-plugin-message-channel` must also be set to `true`.

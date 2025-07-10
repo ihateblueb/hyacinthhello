@@ -19,7 +19,6 @@ class HyacinthHello : JavaPlugin() {
 
         Storage.init()
         Metrics.register()
-        ProxyMessenger.register()
 
         if (!config.getBoolean("enabled")) {
             Logger.warn("Plugin disabled by configuration, shutting down.")
@@ -31,10 +30,14 @@ class HyacinthHello : JavaPlugin() {
             Expansion().register()
         }
 
-        Listener.register()
+        EventListener.register()
         Commands.register()
+
+        if (config.getBoolean("proxy-mode")) {
+            Logger.info("Proxy mode enabled.")
+            ProxyMessenger.register()
+        }
     }
-    override fun onDisable() {}
 
     companion object {
         lateinit var instance: JavaPlugin

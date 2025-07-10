@@ -1,24 +1,31 @@
 package site.remlit.blueb.hyacinthhello
 
 import com.google.common.io.ByteStreams
+import org.bukkit.entity.Player
+import org.bukkit.event.server.PluginDisableEvent
+import redis.clients.jedis.Jedis
+import redis.clients.jedis.JedisPool
+import java.io.PrintWriter
+import java.net.Socket
 
 class ProxyMessenger {
     companion object {
-        val IDENTIFIER = "hyacinthhello:main"
+        var pool: JedisPool? = null
 
         fun register() {
-            HyacinthHello.instance.server.messenger.registerOutgoingPluginChannel(HyacinthHello.instance, IDENTIFIER)
+            val address = HyacinthHello.instance.config.get("proxy-redis.address")?.toString() ?: "0.0.0.0"
+            val port = HyacinthHello.instance.config.get("proxy-redis.port")?.toString()?.toInt() ?: 25505
+
+            pool = JedisPool(address, port)
         }
 
-        /**
-         * Proxy messages from HyacinthHello must follow this format:
-         *
-         * `{type}::{player uuid},{player name}::{message OR "null"}`
-         * */
-        fun send(message: String) {
-            val stream = ByteStreams.newDataOutput()
-            stream.writeUTF(message)
-            HyacinthHello.instance.server.sendPluginMessage(HyacinthHello.instance, IDENTIFIER, message.toByteArray())
+        fun send(messages: List<String>) {
+            if (pool == null) throw Exception("ProxyMessenger has yet to be registered!")
+            val message = messages.joinToString("::")
+            pool!!.resource.publish(
+                HyacinthHello.instance.config.get("proxy-redis.channel")?.toString() ?: "hyacinthhello",
+                message
+            )
         }
     }
 }
