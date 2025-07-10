@@ -63,8 +63,6 @@ You can also pass a username to get a specific player's message.
 
 With HyacinthHello Velocity, you can have HyacinthHello's custom messages broadcasted across your entire network.
 
-To do this, download the Velocity plugin from [here](https://github.com/ihateblueb/hyacinthhello-velocity) under Releases.
-
 The Velocity plugin can just forward to the other servers, or take over all join, leave, and death messages across the proxy. The latter option is recommended.
 
 Requires Redis.
@@ -99,5 +97,3 @@ death-message: '<yellow>{m}' # Just wraps over the message forwarded from backen
 wrapper-left: '&e&o'
 wrapper-right: ''
 ```
-
-On your proxy `bungee-plugin-message-channel` must also be set to `true`.
