@@ -56,3 +56,42 @@ Placeholders will also have color and formatting in them if the player has permi
 
 You can also pass a username to get a specific player's message.
 - %hyacinthhello_join_[username]%
+
+[SIZE=5]Velocity[/SIZE]
+
+With HyacinthHello Velocity, you can have HyacinthHello's custom messages broadcasted across your entire network.
+
+The Velocity plugin can just forward to the other servers, or take over all join, leave, and death messages across the proxy. The latter option is recommended.
+
+Requires Redis.
+
+On your server:
+
+[code]
+proxy-mode: true
+proxy-redis:
+  address: 0.0.0.0 # Your redis address, this is likely fine
+  port: 6379 # Your redis port, this is likely fine
+  channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+[/code]
+
+On your proxy:
+
+[code]
+# Variables:
+#   {p}   player name
+#   {s}   server name
+#   {m}   forwarded message
+redis:
+  address: 0.0.0.0 # Your redis address, this is likely fine
+  port: 6379 # Your redis port, this is likely fine
+  prefix: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+
+override-backends: true # Overrides default and custom messages.
+join-message: '<yellow>{p} joined {s}' # Allows setting custom formatting for join
+leave-message: '<yellow>{p} left {s}' # Allows setting custom formatting for leave
+death-message: '<yellow>{m}' # Just wraps over the message forwarded from backend servers
+
+wrapper-left: '&e&o'
+wrapper-right: ''
+[/code]

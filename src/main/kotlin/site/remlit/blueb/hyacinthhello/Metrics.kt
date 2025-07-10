@@ -12,6 +12,7 @@ class Metrics {
         fun register() {
             metrics = Metrics(HyacinthHello.instance, 16278)
             metrics.addCustomChart(SimplePie("character_limit") { HyacinthHello.instance.config.getString("maximum-message-length", "60") })
+            metrics.addCustomChart(SimplePie("proxy_mode") { HyacinthHello.instance.config.getString("proxy-mode", "false") })
             metrics.addCustomChart(SingleLineChart("players_with_join_message_set") { collectMessageCount("join") })
             metrics.addCustomChart(SingleLineChart("players_with_leave_message_set") { collectMessageCount("leave") })
             metrics.addCustomChart(SingleLineChart("players_with_death_message_set") { collectMessageCount("death") })
