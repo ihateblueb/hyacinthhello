@@ -29,7 +29,7 @@ proxy-redis: # Ignore if above is false
   address: 0.0.0.0 # Your redis address, this is likely fine
   port: 6379 # Your redis port, this is likely fine
   channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
-  user: # Leave blank unless you know what to put here
+  ssl: false # Leave blank unless you know you have to change this
   pass: # Leave blank unless you know what to put here
 database:
   type: yaml # Default is yaml. Other options are mysql or postgres
@@ -103,7 +103,7 @@ proxy-redis:
   address: 0.0.0.0 # Your redis address, this is likely fine
   port: 6379 # Your redis port, this is likely fine
   channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
-  user: # Leave blank unless you know what to put here
+  ssl: # Leave blank unless you know you have to change this
   pass: # Leave blank unless you know what to put here
 ```
 
@@ -118,7 +118,7 @@ redis:
   address: 0.0.0.0 # Your redis address, this is likely fine
   port: 6379 # Your redis port, this is likely fine
   prefix: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
-  user: # Leave blank unless you know what to put here
+  ssl: # Leave blank unless you know you have to change this
   pass: # Leave blank unless you know what to put here
 
 override-backends: true # Overrides default and custom messages. 
