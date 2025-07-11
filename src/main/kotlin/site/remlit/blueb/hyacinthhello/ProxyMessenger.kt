@@ -1,6 +1,7 @@
 package site.remlit.blueb.hyacinthhello
 
 import redis.clients.jedis.JedisPool
+import redis.clients.jedis.JedisPoolConfig
 
 class ProxyMessenger {
     companion object {
@@ -9,11 +10,13 @@ class ProxyMessenger {
         fun register() {
             val address = HyacinthHello.instance.config.get("proxy-redis.address")?.toString() ?: "0.0.0.0"
             val port = HyacinthHello.instance.config.get("proxy-redis.port")?.toString()?.toInt() ?: 25505
-            val user = HyacinthHello.instance.config.get("proxy-redis.user")?.toString()?.ifBlank { null }
+            val ssl = HyacinthHello.instance.config.get("proxy-redis.ssl")?.toString()?.toBoolean() ?: false
             val pass = HyacinthHello.instance.config.get("proxy-redis.pass")?.toString()?.ifBlank { null }
+            val jedisConfig = JedisPoolConfig()
 
-            pool = if (!user.isNullOrBlank() || !pass.isNullOrBlank()) JedisPool(address, port, user, pass)
-                else JedisPool(address, port)
+            pool = if (!pass.isNullOrBlank()) {
+                JedisPool(jedisConfig, address, port, 0, pass.ifBlank { null }, ssl)
+            } else JedisPool(jedisConfig, address, port, 0, ssl)
         }
 
         fun send(messages: List<String>) {

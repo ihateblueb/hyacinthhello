@@ -14,7 +14,7 @@ class HyacinthHello : JavaPlugin() {
         config.addDefault("proxy-redis.address", "0.0.0.0")
         config.addDefault("proxy-redis.port", 6379)
         config.addDefault("proxy-redis.channel", "hyacinthhello")
-        config.addDefault("proxy-redis.user", "")
+        config.addDefault("proxy-redis.ssl", false)
         config.addDefault("proxy-redis.pass", "")
 
         config.addDefault("database.type", "yaml")
