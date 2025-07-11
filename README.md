@@ -24,7 +24,13 @@ The configuration allows you to modify how the plugin looks. Here's an example:
 
 ```yaml
 enabled: true # Whether to enable the plugin
-proxy-mode: true # Whether to enable Velocity support (see below)
+proxy-mode: false # Whether to enable Velocity support (see below)
+proxy-redis: # Ignore if above is false
+  address: 0.0.0.0 # Your redis address, this is likely fine
+  port: 6379 # Your redis port, this is likely fine
+  channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+  user: # Leave blank unless you know what to put here
+  pass: # Leave blank unless you know what to put here
 prefix: "" # Prefix before command responses
 wrapper-left: "&e&o" # Prefix for messages
 wrapper-right: "" # Suffix for messages
@@ -75,6 +81,8 @@ proxy-redis:
   address: 0.0.0.0 # Your redis address, this is likely fine
   port: 6379 # Your redis port, this is likely fine
   channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+  user: # Leave blank unless you know what to put here
+  pass: # Leave blank unless you know what to put here
 ```
 
 On your proxy:
@@ -88,6 +96,8 @@ redis:
   address: 0.0.0.0 # Your redis address, this is likely fine
   port: 6379 # Your redis port, this is likely fine
   prefix: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+  user: # Leave blank unless you know what to put here
+  pass: # Leave blank unless you know what to put here
 
 override-backends: true # Overrides default and custom messages. 
 join-message: '<yellow>{p} joined {s}' # Allows setting custom formatting for join
