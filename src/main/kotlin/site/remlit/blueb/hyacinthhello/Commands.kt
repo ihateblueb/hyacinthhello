@@ -9,6 +9,7 @@ import co.aikar.commands.annotation.Syntax
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import site.remlit.blueb.hyacinthhello.util.getPrefix
 
 @Suppress("Unused")
 @CommandAlias("hyacinthhello|hyacinth|hh")
@@ -19,11 +20,6 @@ class Commands : BaseCommand() {
         sender.sendMessage("Running HyacinthHello version ${HyacinthHello.instance.description.version}")
     }
 
-    private fun getPrefix(): String {
-        val prefix = HyacinthHello.instance.config.get("prefix")?.toString() ?: ""
-        return if (prefix.isEmpty()) ""
-        else "$prefix "
-    }
     private fun getMaxLength() = HyacinthHello.instance.config.get("maximum-message-length")?.toString()?.toInt() ?: 60
 
 
@@ -106,6 +102,9 @@ class Commands : BaseCommand() {
                 }
             }
         }
+
+        if (!sentence.isBlank() && !(Economy.charge(msgPlayer, MessageType.fromString(type)) ?: false))
+            return
 
         Storage.set(msgPlayer.uniqueId.toString(), "$type.msg", sentence)
         sender.sendMessage(
