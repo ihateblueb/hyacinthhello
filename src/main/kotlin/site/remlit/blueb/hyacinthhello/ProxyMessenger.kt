@@ -9,10 +9,11 @@ class ProxyMessenger {
         fun register() {
             val address = HyacinthHello.instance.config.get("proxy-redis.address")?.toString() ?: "0.0.0.0"
             val port = HyacinthHello.instance.config.get("proxy-redis.port")?.toString()?.toInt() ?: 25505
-            val user = HyacinthHello.instance.config.get("proxy-redis.user")?.toString()
-            val pass = HyacinthHello.instance.config.get("proxy-redis.pass")?.toString()
+            val user = HyacinthHello.instance.config.get("proxy-redis.user")?.toString()?.ifBlank { null }
+            val pass = HyacinthHello.instance.config.get("proxy-redis.pass")?.toString()?.ifBlank { null }
 
-            pool = JedisPool(address, port, user, pass)
+            pool = if (!user.isNullOrBlank() || !pass.isNullOrBlank()) JedisPool(address, port, user, pass)
+                else JedisPool(address, port)
         }
 
         fun send(messages: List<String>) {

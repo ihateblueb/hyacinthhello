@@ -13,6 +13,7 @@ class Metrics {
             metrics = Metrics(HyacinthHello.instance, 16278)
             metrics.addCustomChart(SimplePie("character_limit") { HyacinthHello.instance.config.getString("maximum-message-length", "60") })
             metrics.addCustomChart(SimplePie("proxy_mode") { HyacinthHello.instance.config.getString("proxy-mode", "false") })
+            metrics.addCustomChart(SimplePie("database_type") { HyacinthHello.instance.config.getString("database.type", "yaml") })
             metrics.addCustomChart(SingleLineChart("players_with_join_message_set") { collectMessageCount("join") })
             metrics.addCustomChart(SingleLineChart("players_with_leave_message_set") { collectMessageCount("leave") })
             metrics.addCustomChart(SingleLineChart("players_with_death_message_set") { collectMessageCount("death") })
@@ -23,8 +24,7 @@ class Metrics {
 
             val players = Storage.listPlayers()
             for (player in players) {
-                val uuid = player.name.removeSuffix(".yml")
-                if (!Storage.get(uuid, "$type.msg").isNullOrBlank()) count++
+                if (!Storage.get(player, "$type.msg").isNullOrBlank()) count++
             }
 
             return count

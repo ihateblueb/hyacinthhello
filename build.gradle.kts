@@ -31,17 +31,25 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
     implementation("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.0.2")
+
     implementation("redis.clients:jedis:6.0.0")
+
+    implementation("com.zaxxer:HikariCP:6.3.0")
+    implementation("org.postgresql:postgresql:42.7.7")
+    implementation("com.mysql:mysql-connector-j:9.3.0")
 }
 
 group = "site.remlit.blueb"
-version = "2.2.1"
+version = "2.3.0"
 description = "HyacinthHello"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks {
     shadowJar {
         relocate("org.bstats", "site.remlit.blueb.hyacinthhello.bstats-bukkit")
+        relocate("com.zaxxer", "site.remlit.blueb.hyacinthhello.HikariCP")
+        relocate("org.postgresql", "site.remlit.blueb.hyacinthhello.postgresql")
+        relocate("com.mysql", "site.remlit.blueb.hyacinthhello.mysql-connector-j")
     }
     runServer {
         minecraftVersion("1.20")

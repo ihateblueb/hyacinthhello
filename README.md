@@ -31,6 +31,14 @@ proxy-redis: # Ignore if above is false
   channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
   user: # Leave blank unless you know what to put here
   pass: # Leave blank unless you know what to put here
+database:
+  type: yaml # Default is yaml. Other options are mysql or postgres
+  # If you chose yaml, you can ignore the rest of the database config
+  host: 0.0.0.0
+  port: 3306 # Default mysql is 3306, postgres is 5432
+  db: hyacinthhello # Create this
+  user: # Fill this in
+  pass: # Fill this in
 prefix: "" # Prefix before command responses
 wrapper-left: "&e&o" # Prefix for messages
 wrapper-right: "" # Suffix for messages
@@ -38,7 +46,6 @@ maximum-message-length: 60 # Checked when player sets message
 regex-filters: # Regex filters don't need to be wrapped in /
   - "simpleexactmatch"
   - "t[a-zA-Z]st"
-use-proxy-default-messages: false # Disables default join, leave, and death messages so that HyacinthHello Velocity can broadcast them to the entire network. See more under Velocity.
 ```
 
 ## Permissions
@@ -70,6 +77,8 @@ You can also pass a username to get a specific player's message.
 With HyacinthHello Velocity, you can have HyacinthHello's custom messages broadcasted across your entire network.
 
 The Velocity plugin can just forward to the other servers, or take over all join, leave, and death messages across the proxy. The latter option is recommended.
+
+If you wanted to sync player's custom messages across your proxy, you could use a single MySQL or Postgres database for all of your servers. 
 
 Requires Redis.
 
