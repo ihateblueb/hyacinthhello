@@ -39,6 +39,13 @@ database:
   db: hyacinthhello # Create this
   user: # Fill this in
   pass: # Fill this in
+economy:
+  enabled: false # Whether to charge for changing messages
+  type: 'vault' # Options are vault or playerpoints
+  cost: # PlayerPoints only supports whole numbers (eg 10.0, not 10.5)
+    joinmsg: 10.0
+    leavemsg: 10.0
+    deathmsg: 10.0
 prefix: "" # Prefix before command responses
 wrapper-left: "&e&o" # Prefix for messages
 wrapper-right: "" # Suffix for messages
@@ -47,6 +54,12 @@ regex-filters: # Regex filters don't need to be wrapped in /
   - "simpleexactmatch"
   - "t[a-zA-Z]st"
 ```
+
+## Economy
+
+Supports either Vault or [Rosewood Development's PlayerPoints](https://www.spigotmc.org/resources/playerpoints.80745/).
+
+Players will not be charged for clearing their message, only setting it.
 
 ## Permissions
 

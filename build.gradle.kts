@@ -12,14 +12,21 @@ repositories {
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") {
         name = "spigotmc-repo"
     }
-    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/") {
-        name = "extendedclip-repo"
-    }
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    maven("https://jitpack.io") {
+        name = "jitpack"
+    }
+
+    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/") {
+        name = "extendedclip-repo"
+    }
     maven("https://repo.aikar.co/content/groups/aikar/") {
         name = "aikar-repo"
+    }
+    maven("https://repo.rosewooddev.io/repository/public/") {
+        name = "rosewood-repo"
     }
 }
 
@@ -32,6 +39,9 @@ dependencies {
     implementation("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.0.2")
 
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    compileOnly("org.black_ixx:playerpoints:3.3.2")
+
     implementation("redis.clients:jedis:6.0.0")
 
     implementation("com.zaxxer:HikariCP:6.3.0")
@@ -40,7 +50,7 @@ dependencies {
 }
 
 group = "site.remlit.blueb"
-version = "2.3.1"
+version = "2.4.0"
 description = "HyacinthHello"
 java.sourceCompatibility = JavaVersion.VERSION_17
 

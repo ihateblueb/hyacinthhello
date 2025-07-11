@@ -24,6 +24,12 @@ class HyacinthHello : JavaPlugin() {
         config.addDefault("database.user", "")
         config.addDefault("database.pass", "")
 
+        config.addDefault("economy.enabled", false)
+        config.addDefault("economy.type", "vault")
+        config.addDefault("economy.cost.joinmsg", 10.0)
+        config.addDefault("economy.cost.leavemsg", 10.0)
+        config.addDefault("economy.cost.deathmsg", 10.0)
+
         config.addDefault("prefix", "")
         config.addDefault("wrapper-left", "&e&o")
         config.addDefault("wrapper-right", "")
@@ -31,6 +37,11 @@ class HyacinthHello : JavaPlugin() {
         config.addDefault("regex-filters", listOf<String>())
         config.options().copyDefaults(true)
         saveConfig()
+
+        if (!config.getBoolean("enabled")) {
+            Logger.warn("Plugin disabled by configuration, shutting down")
+            instance.server.pluginManager.disablePlugin(this)
+        }
 
         Storage.init()
         Metrics.register()
@@ -42,10 +53,7 @@ class HyacinthHello : JavaPlugin() {
             ProxyMessenger.register()
         }
 
-        if (!config.getBoolean("enabled")) {
-            Logger.warn("Plugin disabled by configuration, shutting down")
-            instance.server.pluginManager.disablePlugin(this)
-        }
+        Economy.register()
 
         if (instance.server.pluginManager.getPlugin("PlaceholderAPI") != null) {
             Logger.info("Found PlaceholderAPI, registering expansion")
