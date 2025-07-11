@@ -57,38 +57,28 @@ class Economy {
                 "vault" -> {
                     if (!enabled) return null
 
-                    val cost = HyacinthHello.instance.config.get("economy.cost.$messageType")?.toString()?.toInt()?.toDouble() ?: 10.0
+                    val cost = HyacinthHello.instance.config.get("economy.cost.$messageType")?.toString()?.toDouble() ?: 10.0
                     val result = vaultEconomy.withdrawPlayer(
                         player,
                         cost
                     ).type == EconomyResponse.ResponseType.SUCCESS
 
-                    if (result) {
-                        player.sendMessage(
-                            ChatColor.translateAlternateColorCodes('&', "${getPrefix()}Charged ${vaultEconomy.format(cost)} to change your message")
-                        )
-                    } else {
+                    if (!result)
                         player.sendMessage(
                             ChatColor.translateAlternateColorCodes('&', "${getPrefix()}You cannot afford this, changing your message costs ${vaultEconomy.format(cost)}")
                         )
-                    }
                     return result
                 }
                 "playerpoints" -> {
                     if (!enabled) return null
 
-                    val cost = HyacinthHello.instance.config.get("economy.cost.$messageType")?.toString()?.toInt() ?: 10
+                    val cost = HyacinthHello.instance.config.get("economy.cost.$messageType")?.toString()?.toDouble()?.toInt() ?: 10
                     val result = pointsApi.take(player.uniqueId, cost)
 
-                    if (result) {
-                        player.sendMessage(
-                            ChatColor.translateAlternateColorCodes('&', "${getPrefix()}Charged $cost points to change your message")
-                        )
-                    } else {
+                    if (!result)
                         player.sendMessage(
                             ChatColor.translateAlternateColorCodes('&', "${getPrefix()}You cannot afford this, changing your message costs $cost points")
                         )
-                    }
                     return result
                 }
                 else -> throw EconomyException("Illegal economy type $type")

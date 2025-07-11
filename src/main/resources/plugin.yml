@@ -1,5 +1,5 @@
 name: HyacinthHello
-version: '2.3.1'
+version: '2.4.0'
 main: site.remlit.blueb.hyacinthhello.HyacinthHello
 api-version: 1.19
 authors: [ blueb ]
