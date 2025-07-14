@@ -50,13 +50,14 @@ dependencies {
 }
 
 group = "site.remlit.blueb"
-version = "2.4.0"
+version = "2.4.1"
 description = "HyacinthHello"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks {
     shadowJar {
         relocate("org.bstats", "site.remlit.blueb.hyacinthhello.bstats-bukkit")
+        relocate("redis.clients", "site.remlit.blueb.hyacinthhello.jedis")
         relocate("com.zaxxer", "site.remlit.blueb.hyacinthhello.HikariCP")
         relocate("org.postgresql", "site.remlit.blueb.hyacinthhello.postgresql")
         relocate("com.mysql", "site.remlit.blueb.hyacinthhello.mysql-connector-j")

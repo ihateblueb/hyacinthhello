@@ -2,6 +2,7 @@ package site.remlit.blueb.hyacinthhello
 
 import redis.clients.jedis.JedisPool
 import redis.clients.jedis.JedisPoolConfig
+import kotlin.concurrent.thread
 
 class ProxyMessenger {
     companion object {
@@ -20,12 +21,14 @@ class ProxyMessenger {
         }
 
         fun send(messages: List<String>) {
-            if (pool == null) throw Exception("ProxyMessenger has yet to be registered!")
-            val message = messages.joinToString("::")
-            pool!!.resource.publish(
-                HyacinthHello.instance.config.get("proxy-redis.channel")?.toString() ?: "hyacinthhello",
-                message
-            )
+            thread(name = "HyacinthHello Proxy Messenger") {
+                if (pool == null) throw Exception("ProxyMessenger has yet to be registered!")
+                val message = messages.joinToString("::")
+                pool!!.resource.publish(
+                    HyacinthHello.instance.config.get("proxy-redis.channel")?.toString() ?: "hyacinthhello",
+                    message
+                )
+            }
         }
     }
 }
