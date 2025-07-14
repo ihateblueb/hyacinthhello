@@ -24,6 +24,28 @@ The configuration allows you to modify how the plugin looks. Here's an example:
 
 [code]
 enabled: true # Whether to enable the plugin
+proxy-mode: false # Whether to enable Velocity support (see below)
+proxy-redis: # Ignore if above is false
+  address: 0.0.0.0 # Your redis address, this is likely fine
+  port: 6379 # Your redis port, this is likely fine
+  channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+  ssl: false # Leave blank unless you know you have to change this
+  pass: # Leave blank unless you know what to put here
+database:
+  type: yaml # Default is yaml. Other options are mysql or postgres
+  # If you chose yaml, you can ignore the rest of the database config
+  host: 0.0.0.0
+  port: 3306 # Default mysql is 3306, postgres is 5432
+  db: hyacinthhello # Create this
+  user: # Fill this in
+  pass: # Fill this in
+economy:
+  enabled: false # Whether to charge for changing messages
+  type: 'vault' # Options are vault or playerpoints
+  cost: # PlayerPoints only supports whole numbers (eg 10.0, not 10.5)
+    joinmsg: 10.0
+    leavemsg: 10.0
+    deathmsg: 10.0
 prefix: "" # Prefix before command responses
 wrapper-left: "&e&o" # Prefix for messages
 wrapper-right: "" # Suffix for messages
@@ -32,6 +54,12 @@ regex-filters: # Regex filters don't need to be wrapped in /
   - "simpleexactmatch"
   - "t[a-zA-Z]st"
 [/code]
+
+[SIZE=5]Economy[/SIZE]
+
+Supports either Vault or Rosewood Development's PlayerPoints (https://www.spigotmc.org/resources/playerpoints.80745/).
+
+Players will not be charged for clearing their message, only setting it.
 
 [SIZE=5]Permissions[/SIZE]
 
@@ -63,6 +91,8 @@ With HyacinthHello Velocity, you can have HyacinthHello's custom messages broadc
 
 The Velocity plugin can just forward to the other servers, or take over all join, leave, and death messages across the proxy. The latter option is recommended.
 
+If you wanted to sync player's custom messages across your proxy, you could use a single MySQL or Postgres database for all of your servers.
+
 Requires Redis.
 
 On your server:
@@ -73,6 +103,8 @@ proxy-redis:
   address: 0.0.0.0 # Your redis address, this is likely fine
   port: 6379 # Your redis port, this is likely fine
   channel: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+  ssl: # Leave blank unless you know you have to change this
+  pass: # Leave blank unless you know what to put here
 [/code]
 
 On your proxy:
@@ -86,6 +118,8 @@ redis:
   address: 0.0.0.0 # Your redis address, this is likely fine
   port: 6379 # Your redis port, this is likely fine
   prefix: hyacinthhello # Leave default, unless you have multiple proxies with HyacinthHello
+  ssl: # Leave blank unless you know you have to change this
+  pass: # Leave blank unless you know what to put here
 
 override-backends: true # Overrides default and custom messages.
 join-message: '<yellow>{p} joined {s}' # Allows setting custom formatting for join
