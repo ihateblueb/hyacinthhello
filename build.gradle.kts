@@ -9,8 +9,9 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") {
-        name = "spigotmc-repo"
+
+    maven("https://repo.papermc.io/repository/maven-public/") {
+        name = "papermc"
     }
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
@@ -31,45 +32,48 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
-    compileOnly("org.jetbrains:annotations:23.0.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
 
     compileOnly("me.clip:placeholderapi:2.11.6")
-    implementation("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
+    compileOnly("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.0.2")
 
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("org.black_ixx:playerpoints:3.3.2")
 
-    implementation("redis.clients:jedis:6.0.0")
+    compileOnly("redis.clients:jedis:6.0.0")
 
-    implementation("com.zaxxer:HikariCP:6.3.0")
-    implementation("org.postgresql:postgresql:42.7.7")
-    implementation("com.mysql:mysql-connector-j:9.3.0")
+    compileOnly("com.zaxxer:HikariCP:6.3.0")
+    compileOnly("org.postgresql:postgresql:42.7.7")
+    compileOnly("com.mysql:mysql-connector-j:9.3.0")
+
+    compileOnly("org.jetbrains:annotations:23.0.0")
 }
 
-group = "site.remlit.blueb"
-version = "2.4.1"
+group = "site.remlit"
+version = "2.5.0"
 description = "HyacinthHello"
-java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks {
     shadowJar {
-        relocate("org.bstats", "site.remlit.blueb.hyacinthhello.bstats-bukkit")
-        relocate("redis.clients", "site.remlit.blueb.hyacinthhello.jedis")
-        relocate("com.zaxxer", "site.remlit.blueb.hyacinthhello.HikariCP")
-        relocate("org.postgresql", "site.remlit.blueb.hyacinthhello.postgresql")
-        relocate("com.mysql", "site.remlit.blueb.hyacinthhello.mysql-connector-j")
+        relocate("org.bstats", "site.remlit.hyacinthhello.bstats-bukkit")
     }
     runServer {
-        minecraftVersion("1.20")
+        minecraftVersion("1.21.10")
     }
 }
 
-val targetJavaVersion = 17
+val targetJavaVersion = 21
+
 kotlin {
     jvmToolchain(targetJavaVersion)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
+    }
 }
 
 tasks.build {
@@ -99,7 +103,7 @@ publishing {
     }
     publications {
         create<MavenPublication>("maven") {
-            groupId = "site.remlit.blueb"
+            groupId = "site.remlit"
             artifactId = "hyacinthhello"
             version = project.version.toString()
 

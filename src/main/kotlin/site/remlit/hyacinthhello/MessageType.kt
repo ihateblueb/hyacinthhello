@@ -1,4 +1,4 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 enum class MessageType {
     JOIN,

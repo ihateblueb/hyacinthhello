@@ -1,6 +1,6 @@
-package site.remlit.blueb.hyacinthhello.util
+package site.remlit.hyacinthhello.util
 
-import site.remlit.blueb.hyacinthhello.HyacinthHello
+import site.remlit.hyacinthhello.HyacinthHello
 
 fun getPrefix(): String {
     val prefix = HyacinthHello.instance.config.get("prefix")?.toString() ?: ""

@@ -1,3 +1,3 @@
-package site.remlit.blueb.hyacinthhello.exception
+package site.remlit.hyacinthhello.exception
 
 class StorageException(message: String) : Exception(message)

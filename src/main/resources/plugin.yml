@@ -1,7 +1,8 @@
 name: HyacinthHello
 version: '2.4.1'
-main: site.remlit.blueb.hyacinthhello.HyacinthHello
-api-version: 1.19
+main: site.remlit.hyacinthhello.HyacinthHello
+paper-plugin-loader: site.remlit.hyacinthhello.HyacinthHelloPluginLoader
+api-version: 1.20
 authors: [ blueb ]
 softdepend:
   - PlaceholderAPI

@@ -1,4 +1,4 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
@@ -9,7 +9,7 @@ import co.aikar.commands.annotation.Syntax
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import site.remlit.blueb.hyacinthhello.util.getPrefix
+import site.remlit.hyacinthhello.util.getPrefix
 
 @Suppress("Unused")
 @CommandAlias("hyacinthhello|hyacinth|hh")
@@ -91,7 +91,7 @@ class Commands : BaseCommand() {
         }
 
         val filters = HyacinthHello.instance.config.getList("regex-filters")
-        if (filters != null && filters.isNotEmpty()) {
+        if (!filters.isNullOrEmpty()) {
             for (filter in filters) {
                 val string = filter.toString()
                 if (string.isNotBlank() && sentence.matches(Regex(string))) {
@@ -103,7 +103,7 @@ class Commands : BaseCommand() {
             }
         }
 
-        if (!sentence.isBlank() && !(Economy.charge(msgPlayer, MessageType.fromString(type)) ?: false))
+        if (!sentence.isBlank() && !(Economy.charge(msgPlayer, MessageType.fromString(type))))
             return
 
         Storage.set(msgPlayer.uniqueId.toString(), "$type.msg", sentence)

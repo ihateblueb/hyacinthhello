@@ -1,4 +1,4 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 import net.milkbowl.vault.economy.Economy
 import net.milkbowl.vault.economy.EconomyResponse
@@ -7,8 +7,8 @@ import org.black_ixx.playerpoints.PlayerPointsAPI
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
-import site.remlit.blueb.hyacinthhello.exception.EconomyException
-import site.remlit.blueb.hyacinthhello.util.getPrefix
+import site.remlit.hyacinthhello.exception.EconomyException
+import site.remlit.hyacinthhello.util.getPrefix
 
 class Economy {
     companion object {
@@ -52,10 +52,10 @@ class Economy {
             }
         }
 
-        fun charge(player: Player, messageType: MessageType): Boolean? {
+        fun charge(player: Player, messageType: MessageType): Boolean {
             when (type) {
                 "vault" -> {
-                    if (!enabled) return null
+                    if (!enabled) return true
 
                     val cost = HyacinthHello.instance.config.get("economy.cost.$messageType")?.toString()?.toDouble() ?: 10.0
                     val result = vaultEconomy.withdrawPlayer(
@@ -70,7 +70,7 @@ class Economy {
                     return result
                 }
                 "playerpoints" -> {
-                    if (!enabled) return null
+                    if (!enabled) return true
 
                     val cost = HyacinthHello.instance.config.get("economy.cost.$messageType")?.toString()?.toDouble()?.toInt() ?: 10
                     val result = pointsApi.take(player.uniqueId, cost)

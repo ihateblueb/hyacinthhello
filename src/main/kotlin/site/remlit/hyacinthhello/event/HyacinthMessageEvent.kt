@@ -1,4 +1,4 @@
-package site.remlit.blueb.hyacinthhello.event
+package site.remlit.hyacinthhello.event
 
 import org.bukkit.entity.Player
 import org.bukkit.event.Event

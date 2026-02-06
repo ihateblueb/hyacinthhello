@@ -1,9 +1,9 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.bukkit.configuration.file.YamlConfiguration
-import site.remlit.blueb.hyacinthhello.exception.StorageException
+import site.remlit.hyacinthhello.exception.StorageException
 import java.io.File
 import java.nio.file.Files
 import java.sql.Connection

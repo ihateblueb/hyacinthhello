@@ -1,4 +1,4 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 import co.aikar.commands.BukkitCommandManager
 import org.bukkit.plugin.java.JavaPlugin

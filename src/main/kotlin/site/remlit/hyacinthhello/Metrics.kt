@@ -1,9 +1,8 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 import org.bstats.bukkit.Metrics
 import org.bstats.charts.SimplePie
 import org.bstats.charts.SingleLineChart
-import kotlin.io.path.name
 
 class Metrics {
     companion object {

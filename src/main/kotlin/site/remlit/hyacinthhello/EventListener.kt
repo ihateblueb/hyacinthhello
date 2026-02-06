@@ -1,4 +1,4 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -9,9 +9,9 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import site.remlit.blueb.hyacinthhello.event.HyacinthDeathMessageEvent
-import site.remlit.blueb.hyacinthhello.event.HyacinthJoinMessageEvent
-import site.remlit.blueb.hyacinthhello.event.HyacinthLeaveMessageEvent
+import site.remlit.hyacinthhello.event.HyacinthDeathMessageEvent
+import site.remlit.hyacinthhello.event.HyacinthJoinMessageEvent
+import site.remlit.hyacinthhello.event.HyacinthLeaveMessageEvent
 
 class EventListener : Listener {
     private fun inProxyMode(): Boolean = HyacinthHello.instance.config.get("proxy-mode")?.toString()?.toBoolean() ?: false

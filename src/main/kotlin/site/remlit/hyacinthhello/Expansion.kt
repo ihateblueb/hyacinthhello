@@ -1,4 +1,4 @@
-package site.remlit.blueb.hyacinthhello
+package site.remlit.hyacinthhello
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import org.bukkit.ChatColor

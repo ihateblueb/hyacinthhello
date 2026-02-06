@@ -1,3 +1,3 @@
-package site.remlit.blueb.hyacinthhello.exception
+package site.remlit.hyacinthhello.exception
 
 class EconomyException(message: String) : Exception(message)
