@@ -103,8 +103,12 @@ class Commands : BaseCommand() {
             }
         }
 
-        if (!sentence.isBlank() && !(Economy.charge(msgPlayer, MessageType.fromString(type))))
+        if (!sentence.isBlank() && !notSelf && !(Economy.charge(msgPlayer, MessageType.fromString(type)))) {
+            sender.sendMessage(
+                ChatColor.translateAlternateColorCodes('&', "${getPrefix()}You cannot afford this")
+            )
             return
+        }
 
         Storage.set(msgPlayer.uniqueId.toString(), "$type.msg", sentence)
         sender.sendMessage(
