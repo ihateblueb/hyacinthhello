@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "hyacinthhello",
+  "version": "${version}",
+
+  "name": "HyacinthHello",
+  "description": "",
+  "authors": [],
+  "contact": {},
+
+  "license": "GPL-3.0",
+  "icon": "assets/hyacinthhello/icon.png",
+
+  "environment": "server",
+  "entrypoints": {
+    "fabric-datagen": ["site.remlit.hyacinthhello.fabric.client.FabricDataGenerator"],
+    "main": ["site.remlit.hyacinthhello.fabric.Fabric"]
+  },
+
+  "mixins": [
+    "hyacinthhello.mixins.json"
+    ,{
+      "config": "hyacinthhello.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

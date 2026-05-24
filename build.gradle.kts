@@ -7,28 +7,7 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-
-    maven("https://repo.papermc.io/repository/maven-public/") {
-        name = "papermc"
-    }
-    maven("https://oss.sonatype.org/content/groups/public/") {
-        name = "sonatype"
-    }
-    maven("https://jitpack.io") {
-        name = "jitpack"
-    }
-
-    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/") {
-        name = "extendedclip-repo"
-    }
-    maven("https://repo.aikar.co/content/groups/aikar/") {
-        name = "aikar-repo"
-    }
-    maven("https://repo.rosewooddev.io/repository/public/") {
-        name = "rosewood-repo"
-    }
+    maven("https://repo.remlit.site/mirror")
 }
 
 dependencies {

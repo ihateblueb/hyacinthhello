@@ -6,6 +6,8 @@ Messages can be set from `/joinmsg`, `/leavemsg`, and `/deathmsg` and are stored
 
 See a demo at https://www.youtube.com/watch?v=L6Li0QnvPis.
 
+Supports Minecraft versions 1.20.1 and higher, requires Java 21 or higher.
+
 ## Commands
 
 Messages are set with commands. You can clear a message by passing a blank value.
