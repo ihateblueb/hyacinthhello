@@ -33,26 +33,26 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.21")
 
-    compileOnly("me.clip:placeholderapi:2.11.6")
+    compileOnly("me.clip:placeholderapi:2.12.2")
     compileOnly("co.aikar:acf-bukkit:0.5.1-SNAPSHOT")
-    implementation("org.bstats:bstats-bukkit:3.0.2")
+    implementation("org.bstats:bstats-bukkit:3.2.1")
 
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
-    compileOnly("org.black_ixx:playerpoints:3.3.2")
+    compileOnly("org.black_ixx:playerpoints:3.3.4")
 
-    compileOnly("redis.clients:jedis:6.0.0")
+    compileOnly("redis.clients:jedis:7.5.0")
 
-    compileOnly("com.zaxxer:HikariCP:6.3.0")
-    compileOnly("org.postgresql:postgresql:42.7.7")
-    compileOnly("com.mysql:mysql-connector-j:9.3.0")
+    compileOnly("com.zaxxer:HikariCP:7.0.2")
+    compileOnly("org.postgresql:postgresql:42.7.11")
+    compileOnly("com.mysql:mysql-connector-j:9.7.0")
 
-    compileOnly("org.jetbrains:annotations:23.0.0")
+    compileOnly("org.jetbrains:annotations:26.1.0")
 }
 
 group = "site.remlit"
-version = "2.5.0"
+version = "2.5.1"
 description = "HyacinthHello"
 
 tasks {

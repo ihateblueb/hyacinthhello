@@ -1,5 +1,5 @@
 name: HyacinthHello
-version: '2.4.1'
+version: '${version}'
 main: site.remlit.hyacinthhello.HyacinthHello
 paper-plugin-loader: site.remlit.hyacinthhello.HyacinthHelloPluginLoader
 api-version: 1.20
