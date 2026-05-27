@@ -16,6 +16,7 @@ import site.remlit.hyacinthhello.event.HyacinthLeaveMessageEvent
 class EventListener : Listener {
     private fun inProxyMode(): Boolean = HyacinthHello.instance.config.get("proxy-mode")?.toString()?.toBoolean() ?: false
 
+
     @EventHandler(priority = EventPriority.HIGHEST)
     fun onPlayerJoin(event: PlayerJoinEvent) = handle(event.player, event.eventName, joinEvent = event)
 
@@ -26,8 +27,8 @@ class EventListener : Listener {
     fun onPlayerDeath(event: PlayerDeathEvent) = handle(event.entity, event.eventName, deathEvent = event)
 
 
-    private fun getWrapperLeft(): String = HyacinthHello.instance.config.get("wrapper-left")?.toString() ?: ""
-    private fun getWrapperRight(): String = HyacinthHello.instance.config.get("wrapper-right")?.toString() ?: ""
+    private fun wrapperLeft(): String = HyacinthHello.instance.config.get("wrapper-left")?.toString() ?: ""
+    private fun wrapperRight(): String = HyacinthHello.instance.config.get("wrapper-right")?.toString() ?: ""
 
 
     private fun handle(
@@ -78,7 +79,7 @@ class EventListener : Listener {
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyacinthHello.instance, {
             HyacinthHello.instance.server.broadcastMessage(
-                ChatColor.translateAlternateColorCodes('&', "${getWrapperLeft()}$message${getWrapperRight()}")
+                ChatColor.translateAlternateColorCodes('&', "${wrapperLeft()}$message${wrapperRight()}")
             )
         }, 1L)
     }
